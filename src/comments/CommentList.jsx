@@ -10,7 +10,7 @@ const CommentList = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isShow, setisShow] = useState(false);
-  const { data } = useSelector((state) => state.comments.commentsByTodoId);
+  const { data } = useSelector((state) => state.commentlist.commentsByPostId);
 
   useEffect(() => {
     if (isShow) {
