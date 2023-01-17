@@ -83,7 +83,7 @@ const initialState = {
 };
 
 export const commentsSlice = createSlice({
-  name: "comments",
+  name: "comment",
   initialState,
   reducers: {
     // clearTodo: (state) => {
