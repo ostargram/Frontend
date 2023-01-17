@@ -1,5 +1,4 @@
 {
-
   "user": [
     {
       "username": "wldnr1208",
@@ -77,9 +76,8 @@
       "id": 7
     }
   ],
-
   "posts": [
-  {
+    {
       "title": "삭제 구현 ",
       "body": "trueㄴ",
       "id": 3
@@ -88,10 +86,15 @@
       "title": "메인",
       "body": "메인에서 게시글 전체 조회 가능",
       "id": 4
+    },
+    {
+      "title": "wpahr",
+      "body": "sodyd",
+      "id": 5
     }
   ],
   "commentlist": {
-    "postId": "5",
+    "postId": "3",
     "content": "1번입니다",
     "id": 1
   }
