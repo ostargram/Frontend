@@ -22,7 +22,7 @@ const Home = () => {
       </button>
       <button
         onClick={() => {
-          navigate("/SignIn");
+          navigate("/");
         }}
       >
         SignIn으로 이동
