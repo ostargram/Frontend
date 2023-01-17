@@ -21,7 +21,9 @@ export const __postUser = createAsyncThunk(
   "signup",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axiosInstance.post("/users/signup", payload);
+      const { data } = await axiosInstance.post("/users/signup", payload, {
+        withCredentials: true,
+      });
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
