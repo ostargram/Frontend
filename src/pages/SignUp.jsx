@@ -91,6 +91,7 @@ const SignUp = () => {
   };
 
   return (
+
     <SignUpContainer>
       <SignUpFormImg />
       <SignUpForm onSubmit={onSubmitUserHandler}>
@@ -162,10 +163,12 @@ const SignUp = () => {
         <StButton1>회원가입</StButton1>
       </SignUpForm>
     </SignUpContainer>
+
   );
 };
 
 export default SignUp;
+
 
 const SignUpContainer = styled.div`
   background-color: #d8d8fa;
@@ -221,3 +224,4 @@ const StH1 = styled.h1`
   padding-top: 20px;
   padding-left: 40%;
 `;
+

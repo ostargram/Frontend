@@ -43,6 +43,7 @@ const SignIn = () => {
   }, [loginCheck, navigate]);
 
   return (
+
     <LoginContainer>
       <LoginFormImg />
       <LoginForm>
@@ -71,10 +72,12 @@ const SignIn = () => {
         </StButton>
       </LoginForm>
     </LoginContainer>
+
   );
 };
 
 export default SignIn;
+
 
 const LoginContainer = styled.form`
   background-color: #d8d8fa;
@@ -128,3 +131,4 @@ const StH1 = styled.h1`
   padding-top: 50px;
   padding-left: 40%;
 `;
+

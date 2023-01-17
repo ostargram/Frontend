@@ -4,10 +4,8 @@ import userList from "../modules/loginSlice";
  * import 해온 것은 slice.reducer 입니다.
  */
 
-// import todos from "../modules/todosSlice";
-// import todo from "../modules/todoSlice";
-// import comment from "../modules/commentSlice";
-// import comments from "../modules/commentsSlice";
+import posts from "../modules/postsSlice";
+import commentlist from "../modules/commentsSlice";
 
 //  모듈(Slice)이 여러개인 경우
 //  추가할때마다 reducer 안에 각 모듈의 slice.reducer를 추가해줘야 합니다.
@@ -15,7 +13,8 @@ import userList from "../modules/loginSlice";
 // 이것을 각각 모듈로 구현한 다음에 아래 코드로 2개의 모듈을 스토어에 연결해준 것 입니다.
 
 const store = configureStore({
-  reducer: { userList },
-});
 
+  reducer: { userList,posts, commentlist },
+
+})
 export default store;
