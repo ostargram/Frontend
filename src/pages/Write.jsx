@@ -7,7 +7,6 @@ import styled from "styled-components";
 import { __addPostThunk } from "../redux/modules/postsSlice";
 
 const Write = () => {
-
   // const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -16,7 +15,7 @@ const Write = () => {
   // const [like, setLike] = useState();
   const [post, setPost] = useState({
     title: "",
-    body: "",
+    content: "",
   });
 
   const [image, setImage] = useState();
@@ -59,7 +58,6 @@ const Write = () => {
   };
 
   return (
-
     <div>
       <Layout>
         <Header />
@@ -67,11 +65,11 @@ const Write = () => {
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              if (post.title.trim() === "" || post.body.trim() === "") {
+              if (post.title.trim() === "" || post.content.trim() === "") {
                 return alert("모든 항목을 입력해주세요.");
               }
               dispatch(__addPostThunk(post));
-              setPost({ title: "", body: "" });
+              setPost({ title: "", content: "" });
               navigate("/Home");
             }}
           >
@@ -94,9 +92,9 @@ const Write = () => {
             />
             <textarea
               type="text"
-              name="body"
+              name="content"
               placeholder="내용을 입력해주세요. (100자 이내)"
-              value={post.body}
+              value={post.content}
               onChange={onChangeHandler}
               maxLength={100}
             />
@@ -112,12 +110,10 @@ const Write = () => {
         </button>
       </Layout>
     </div>
-
   );
 };
 
 export default Write;
-
 
 const PostWrap = styled.div`
   width: 550px;
@@ -177,4 +173,3 @@ const PostWrap = styled.div`
     padding: 20px;
   }
 `;
-

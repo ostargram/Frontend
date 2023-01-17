@@ -1,5 +1,28 @@
 {
-
+  "emailCheck": [
+    {
+      "emailCheck": "emailCheck",
+      "id": 1
+    },
+    {
+      "id": 100,
+      "email": {
+        "email": "tenstsdfdsfdsf@naver.com"
+      }
+    },
+    {
+      "id": 200,
+      "email": {
+        "email": "test1@naver.com"
+      }
+    },
+    {
+      "id": 300,
+      "email": {
+        "email": "wldnr1208@naver.com"
+      }
+    }
+  ],
   "user": [
     {
       "username": "wldnr1208",
@@ -38,6 +61,22 @@
       "email": "test1@naver.com",
       "gender": "male",
       "id": 5
+    },
+    {
+      "username": "wldnr1208",
+      "password": "wjdals159*",
+      "check_password": "wjdals159*",
+      "email": "1234569@naver.com",
+      "gender": "male",
+      "id": 6
+    },
+    {
+      "username": "wldnr1208",
+      "password": "wjdals159*",
+      "check_password": "wjdals159*",
+      "email": "test1@naver.com",
+      "gender": "male",
+      "id": 7
     }
   ],
   "userList": [
@@ -77,9 +116,8 @@
       "id": 7
     }
   ],
-
   "posts": [
-  {
+    {
       "title": "삭제 구현 ",
       "body": "trueㄴ",
       "id": 3

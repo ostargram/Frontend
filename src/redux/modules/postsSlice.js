@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { axiosInstance } from "../../request/request";
 
 axios.defaults.withCredentials = true;
 
@@ -8,9 +9,7 @@ export const __getPostThunk = createAsyncThunk(
   "GET_POST",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.get(
-        `${"http://localhost:3001"}/posts/${arg}`
-      );
+      const { data } = await axiosInstance.get(`/posts/${arg}`);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -23,8 +22,8 @@ export const __addPostThunk = createAsyncThunk(
   "ADD_POST",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.post(
-        `${"http://localhost:3001"}/posts`,
+      const { data } = await axiosInstance.post(
+        `/posts`,
         arg
         // {withCredentials: true}
       );
@@ -41,8 +40,8 @@ export const __deletePostThunk = createAsyncThunk(
   "DELETE_POST",
   async (arg, thunkAPI) => {
     try {
-      axios.delete(
-        `${"http://localhost:3001"}/posts/${arg}`
+      axiosInstance.delete(
+        `/posts/${arg}`
         // {withCredentials: true}
       );
       return thunkAPI.fulfillWithValue(arg);
@@ -57,8 +56,9 @@ export const __getPostsThunk = createAsyncThunk(
   "GET_POSTS",
   async (_, thunkAPI) => {
     try {
-      const { data } = await axios.get(`${"http://localhost:3001"}/posts`);
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = await axiosInstance.get("/posts");
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data.postList);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -70,7 +70,7 @@ export const __updatePostThunk = createAsyncThunk(
   "UPDATE_POST",
   async (arg, thunkAPI) => {
     try {
-      axios.patch(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
+      axiosInstance.patch(`/posts/${arg.id}`, arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -107,6 +107,7 @@ export const postSlice = createSlice({
     // 전체 게시물 get
     [__getPostsThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
+      console.log(action.payload);
       state.posts = action.payload;
     },
     [__getPostsThunk.rejected]: (state, action) => {
