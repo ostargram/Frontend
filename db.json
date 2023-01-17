@@ -37,6 +37,22 @@
       "email": "test1@naver.com",
       "gender": "male",
       "id": 5
+    },
+    {
+      "username": "wldnr1208",
+      "password": "wjdals159*",
+      "check_password": "wjdals159*",
+      "email": "1234569@naver.com",
+      "gender": "male",
+      "id": 6
+    },
+    {
+      "username": "wldnr1208",
+      "password": "wjdals159*",
+      "check_password": "wjdals159*",
+      "email": "test1@naver.com",
+      "gender": "male",
+      "id": 7
     }
   ],
   "userList": [

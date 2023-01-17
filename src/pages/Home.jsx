@@ -11,7 +11,7 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, posts, error } = useSelector((state) => state.posts);
-  // console.log("게시글 전체 조회", posts);
+  console.log("게시글 전체 조회", posts);
 
   useEffect(() => {
     dispatch(__getPostsThunk());
@@ -23,7 +23,6 @@ const Home = () => {
   if (error) return <div>알수 없는 에러가 발생했습니다.</div>;
   return (
     <div>
-
       <Layout>
         <Header />
 

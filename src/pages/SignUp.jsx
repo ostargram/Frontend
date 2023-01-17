@@ -24,6 +24,8 @@ const SignUp = () => {
   //남성 여성 스테이트 생성
   const [gender, setGender] = useState();
 
+  //email인증
+
   //유저 스테이트 구조분해 할당
   const { email, password, username, check_password } = user;
 
@@ -89,9 +91,8 @@ const SignUp = () => {
     );
     navigate("/");
   };
-
+  console.log(email);
   return (
-
     <SignUpContainer>
       <SignUpFormImg />
       <SignUpForm onSubmit={onSubmitUserHandler}>
@@ -116,7 +117,21 @@ const SignUp = () => {
             placeholder="이메일을 입력해주세요"
             onChange={onChangeUserHandler}
           ></StIput1>
+          {/*          <button
+            type="button"
+            value={email}
+            onClick={() => {
+              dispatch(
+                __emailCheck({
+                  email,
+                })
+              );
+            }}
+          >
+            인증하기
+          </button> */}
         </div>
+
         <p id="help-user" className="help">
           {emailInput}
         </p>
@@ -160,15 +175,13 @@ const SignUp = () => {
         <p id="help-password2" className="help">
           {checkpassInput}
         </p>
-        <StButton1>회원가입</StButton1>
+        <StButton1 type="submit">회원가입</StButton1>
       </SignUpForm>
     </SignUpContainer>
-
   );
 };
 
 export default SignUp;
-
 
 const SignUpContainer = styled.div`
   background-color: #d8d8fa;
@@ -224,4 +237,3 @@ const StH1 = styled.h1`
   padding-top: 20px;
   padding-left: 40%;
 `;
-

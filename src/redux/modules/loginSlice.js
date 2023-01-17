@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 //import { getCookie } from "../../Cookie";
 import { axiosInstance } from "../../request/request";
-import axios from "axios";
-import { getCookie } from "../../Cookie";
+//import { getCookie } from "../../Cookie";
+//import axios from "axios";
 
-axios.defaults.withCredentials = true;
+axiosInstance.defaults.withCredentials = true;
 const initialState = {
   userList: [
     {
@@ -17,14 +17,11 @@ const initialState = {
   isLogin: false,
 };
 
-//회원가입 POST요청
 export const __postUser = createAsyncThunk(
   "signup",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axiosInstance.post("/users/signup", payload, {
-        withCredentials: true,
-      });
+      const { data } = await axiosInstance.post("/users/signup", payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -38,16 +35,14 @@ export const __postLogin = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await axiosInstance
-        .post("/users/login", payload, { withCredentials: true })
+        .post("/users/login", payload, {
+          withCredentials: true,
+        })
         .then((res) => {
           sessionStorage.setItem("access_token", res.headers.access_token);
           sessionStorage.setItem("refresh_token", res.headers.refresh_token);
           console.log(res);
           console.log(payload);
-          console.log(res.headers.JSESSIONID);
-          console.log(res.headers.get("set-cookie"));
-          console.log(res.headers.get("Set-cookie"));
-          console.log(getCookie("JSESSIONID"));
           return res;
         });
       return thunkAPI.fulfillWithValue(data.data);
@@ -60,15 +55,24 @@ export const __postLogin = createAsyncThunk(
 /* export const __emailCheck = createAsyncThunk(
   "emailcheck",
   async (payload, thunkAPI) => {
+    //console.log(payload);
+    const data1 = {
+      id: 300,
+      email: payload,
+    };
     try {
-      const { data } = await axiosInstance.post("/emailcheck", payload);
+      const { data } = await axios.post(
+        "http://localhost:3001/emailCheck",
+        data1
+      );
+      console.log(payload);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
   }
-);
- */
+); */
+
 const userList = createSlice({
   name: "userList",
   initialState,
@@ -76,9 +80,11 @@ const userList = createSlice({
   extraReducers: {
     //post
     [__postUser.pending]: (state) => {
+      //보내는 도중, 진행중
       state.isLoading = true;
     },
     [__postUser.fulfilled]: (state, action) => {
+      //연결후
       state.isLoading = false;
       alert("가입이 완료 되셨습니다!");
     },
@@ -94,10 +100,20 @@ const userList = createSlice({
       state.isLogin = true;
       localStorage.setItem("userinfo", JSON.stringify(action.payload));
     },
-    [__postLogin.rejected]: (state, action) => {
+    /*     [__postLogin.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
+    [__emailCheck.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__emailCheck.fulfilled]: (state, action) => {
+      state.isLoading = false;
+    },
+    [__emailCheck.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    }, */
   },
 });
 
