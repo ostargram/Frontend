@@ -24,8 +24,6 @@ const SignUp = () => {
   //남성 여성 스테이트 생성
   const [gender, setGender] = useState();
 
-  //email인증
-
   //유저 스테이트 구조분해 할당
   const { email, password, username, check_password } = user;
 
@@ -96,7 +94,7 @@ const SignUp = () => {
     <SignUpContainer>
       <SignUpFormImg />
       <SignUpForm onSubmit={onSubmitUserHandler}>
-        <StH1>Sign up</StH1>
+        <StH1>회원가입</StH1>
         <div>
           <StIput1
             type="text"
@@ -136,14 +134,14 @@ const SignUp = () => {
           {emailInput}
         </p>
         <div>
-          <input
+          <StIput2
             type="radio"
             name="gender"
             value="male"
             onChange={(e) => setGender(e.target.value)}
           />
           남성
-          <input
+          <StIput2
             type="radio"
             name="gender"
             value="female"
@@ -175,7 +173,7 @@ const SignUp = () => {
         <p id="help-password2" className="help">
           {checkpassInput}
         </p>
-        <StButton1 type="submit">회원가입</StButton1>
+        <StButton1>회원가입</StButton1>
       </SignUpForm>
     </SignUpContainer>
   );
@@ -216,10 +214,16 @@ const SignUpForm = styled.form`
 `;
 
 const StIput1 = styled.input`
-  margin-left: 30px;
+  margin-left: 35px;
+
   width: 20vw;
   height: 40px;
   border-radius: 5px;
+`;
+
+const StIput2 = styled.input`
+  margin-left: 6vw;
+  margin-bottom: 25px;
 `;
 
 const StButton1 = styled.button`
