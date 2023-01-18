@@ -26,6 +26,10 @@ export const __postUser = createAsyncThunk(
       });
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
+      console.log(error);
+      if (400 < error.status < 500) {
+        alert(error.response.data.messages);
+      }
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -40,15 +44,22 @@ export const __postLogin = createAsyncThunk(
         .post("/users/login", payload, {
           withCredentials: true,
         })
+
         .then((res) => {
+          console.log(res.data.status);
           sessionStorage.setItem("access_token", res.headers.access_token);
           sessionStorage.setItem("refresh_token", res.headers.refresh_token);
           console.log(res);
           console.log(payload);
           return res;
         });
+
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
+      console.log(error);
+      if (400 < error.status < 500) {
+        alert(error.response.data.message);
+      }
       return thunkAPI.rejectWithValue(error);
     }
   }
@@ -88,6 +99,7 @@ const userList = createSlice({
     [__postUser.fulfilled]: (state, action) => {
       //연결후
       state.isLoading = false;
+
       alert("가입이 완료 되셨습니다!");
     },
     [__postUser.rejected]: (state, action) => {
