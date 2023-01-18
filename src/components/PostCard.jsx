@@ -9,7 +9,19 @@ import { useState } from "react";
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [like, setLike] = useState(false);
+
+  const [like, setLike] = useState(false, 0);
+
+  const likeClick = () => {
+    // ***
+    if (like) {
+      setLike(false);
+      // 좋아요를 누르면 firebase, redux에 like_cnt + 1
+    } else {
+      setLike(true);
+      // 좋아요 해제하면 firebase, redux에 like_cnt - 1
+    }
+  };
 
   const onDeleteHandler = () => {
     dispatch(__deletePostThunk(post.id));
@@ -40,12 +52,21 @@ const PostCard = ({ post }) => {
       >
         자세히 보기
       </StButton>
-      {setLike ? (
+
+      {!setLike ? (
         <HiOutlineHeart size="50" color="#e22c2c" />
       ) : (
-        <HiHeart size="50" color="#e22c2c" />
+        <div>
+          <HiHeart
+            size="50"
+            color="#e22c2c"
+            onClick={() => {
+              setLike(like + 1);
+            }}
+          />
+          {like}
+        </div>
       )}
-      <span>좋아요</span>
     </StCard>
   );
 };

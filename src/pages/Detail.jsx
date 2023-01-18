@@ -8,8 +8,6 @@ import { __getPostThunk, __updatePostThunk } from "../redux/modules/postsSlice";
 import CommentList from "../comments/CommentList";
 
 const Detail = () => {
-
-
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -41,7 +39,7 @@ const Detail = () => {
     dispatch(
       __updatePostThunk({
         ...post,
-        body: updatedPost,
+        content: updatedPost,
       })
     );
     setIsEditMode(false);
@@ -85,7 +83,7 @@ const Detail = () => {
               />
             </>
           ) : (
-            <div>{post?.body}</div>
+            <div>{post?.content}</div>
           )}
 
           <div>
@@ -105,10 +103,9 @@ const Detail = () => {
             )}
           </div>
         </div>
-        {/* {!isEditMode && <Comments />} */}
+        {!isEditMode && <CommentList />}
       </Layout>
     </div>
-
   );
 };
 

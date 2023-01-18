@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// 전체 댓글 get
+// 전체 댓글 GET
 export const __getCommentListThunk = createAsyncThunk(
   "GET_COMMENTLIST",
   async (_, thunkAPI) => {
@@ -16,6 +16,7 @@ export const __getCommentListThunk = createAsyncThunk(
   }
 );
 
+// 동일 아이디 GET
 export const __getCommentsByPostId = createAsyncThunk(
   "GET_COMMENT_BY_POST_ID",
   async (arg, thunkAPI) => {
@@ -30,6 +31,7 @@ export const __getCommentsByPostId = createAsyncThunk(
   }
 );
 
+// 댓글 삭제
 export const __deleteComment = createAsyncThunk(
   "DELETE_COMMENT",
   async (arg, thunkAPI) => {
@@ -42,6 +44,7 @@ export const __deleteComment = createAsyncThunk(
   }
 );
 
+// 댓글 수정
 export const __updateComment = createAsyncThunk(
   "UPDATE_COMMENT",
   async (arg, thunkAPI) => {
@@ -54,12 +57,13 @@ export const __updateComment = createAsyncThunk(
   }
 );
 
+// 댓글 post
 export const __addComment = createAsyncThunk(
   "ADD_COMMENT",
   async (arg, thunkAPI) => {
     try {
       const { data } = await axios.post(
-        `${"http://localhost:3001"}/comments`,
+        `${"http://localhost:3001"}/commentlist`,
         arg
       );
       return thunkAPI.fulfillWithValue(data);
@@ -69,13 +73,33 @@ export const __addComment = createAsyncThunk(
   }
 );
 
+// 상세 댓글?
+export const __getComment = createAsyncThunk(
+  "GET_COMMENT",
+  async (arg, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_TODOS}/comment/${arg}`
+      );
+      return thunkAPI.fulfillWithValue(data);
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e);
+    }
+  }
+);
+
 const initialState = {
-  commentlist: {
-    data: [],
-    isLoading: false,
-    error: null,
+  commentlist: [],
+  data: {
+    content: "",
+    username: "",
+    id: 0,
+    todoId: 0,
   },
-  commentsByPostId: {
+  isLoading: false,
+  error: null,
+  isGlobalEditmode: false,
+  commentsByTodoId: {
     data: [],
     isLoading: false,
     error: null,
@@ -83,12 +107,15 @@ const initialState = {
 };
 
 export const commentsSlice = createSlice({
-  name: "comment",
+  name: "commentlist",
   initialState,
   reducers: {
-    // clearTodo: (state) => {
-    //   state.comments = null;
-    // },
+    clearComment: (state) => {
+      state.data.content = "";
+    },
+    globalEditModeToggle: (state, action) => {
+      state.isGlobalEditmode = action.payload;
+    },
   },
   extraReducers: {
     // 전체 댓글 조회
@@ -160,7 +187,19 @@ export const commentsSlice = createSlice({
       state.commentsByTodoId.isLoading = false;
       state.commentsByTodoId.error = action.payload;
     },
+    [__getComment.pending]: (state, action) => {
+      state.isLoading = true;
+    },
+    [__getComment.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+    },
+    [__getComment.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 
+export const { clearComment, globalEditModeToggle } = commentsSlice.actions;
 export default commentsSlice.reducer;
