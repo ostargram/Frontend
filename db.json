@@ -1,28 +1,4 @@
 {
-  "emailCheck": [
-    {
-      "emailCheck": "emailCheck",
-      "id": 1
-    },
-    {
-      "id": 100,
-      "email": {
-        "email": "tenstsdfdsfdsf@naver.com"
-      }
-    },
-    {
-      "id": 200,
-      "email": {
-        "email": "test1@naver.com"
-      }
-    },
-    {
-      "id": 300,
-      "email": {
-        "email": "wldnr1208@naver.com"
-      }
-    }
-  ],
   "user": [
     {
       "username": "wldnr1208",
@@ -126,10 +102,15 @@
       "title": "메인",
       "body": "메인에서 게시글 전체 조회 가능",
       "id": 4
+    },
+    {
+      "title": "wpahr",
+      "body": "sodyd",
+      "id": 5
     }
   ],
   "commentlist": {
-    "postId": "5",
+    "postId": "3",
     "content": "1번입니다",
     "id": 1
   }
