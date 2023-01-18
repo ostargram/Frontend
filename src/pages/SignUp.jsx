@@ -24,8 +24,6 @@ const SignUp = () => {
   //남성 여성 스테이트 생성
   const [gender, setGender] = useState();
 
-  //email인증
-
   //유저 스테이트 구조분해 할당
   const { email, password, username, check_password } = user;
 
@@ -175,7 +173,7 @@ const SignUp = () => {
         <p id="help-password2" className="help">
           {checkpassInput}
         </p>
-        <StButton1 type="submit">회원가입</StButton1>
+        <StButton1>회원가입</StButton1>
       </SignUpForm>
     </SignUpContainer>
   );
