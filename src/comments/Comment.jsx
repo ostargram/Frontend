@@ -12,20 +12,20 @@ import {
   __getComment,
 } from "../redux/modules/commentsSlice";
 
-const Comment = ({ comment }) => {
-  const { id } = useParams();
+const Comment = ({ text, id }) => {
+  console.log(1234, text, id);
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [updatedComment, setUpdatedComment] = useState("");
+  const [updatedComment, setUpdatedComment] = useState(text);
 
-  const { content } = useSelector((state) => state.getcomment.content);
-  console.log("댓글내용", content);
-  const { isGlobalEditmode } = useSelector((state) => state.comment);
+  // const { text } = useSelector((state) => state.getcomment.text);
+  // console.log("댓글내용", text);
+  // const { isGlobalEditmode } = useSelector((state) => state.commentlist);
 
   const onDeleteButtonHandler = () => {
     const result = window.confirm("삭제하시겠습니까?");
     if (result) {
-      dispatch(__deleteComment(comment.id));
+      dispatch(__deleteComment(id));
     } else {
       return;
     }
@@ -34,31 +34,31 @@ const Comment = ({ comment }) => {
   const onUpdateButtonHandler = () => {
     dispatch(
       __updateComment({
-        id: comment.id,
-        content: updatedComment,
-        username: comment.username,
-        postId: id,
+        id: id,
+        text: updatedComment,
       })
     );
     setIsEdit(false);
-    dispatch(globalEditModeToggle(false));
+    // dispatch(globalEditModeToggle(false));
   };
 
   const onChangeEditButtonHandler = () => {
     setIsEdit(true);
-    dispatch(__getComment(comment.id));
-    dispatch(globalEditModeToggle(true));
+    // dispatch(__getComment(comment.id));
+    // dispatch(globalEditModeToggle(true));
   };
 
   const onCancelButtonHandler = () => {
+    setUpdatedComment(text);
     setIsEdit(false);
+
     // dispatch(clearComment());
-    dispatch(globalEditModeToggle(false));
+    // dispatch(globalEditModeToggle(false));
   };
 
-  useEffect(() => {
-    setUpdatedComment(content);
-  }, [content]);
+  // useEffect(() => {
+  //   setUpdatedComment(text);
+  // }, [text]);
 
   return (
     <div>
@@ -75,30 +75,32 @@ const Comment = ({ comment }) => {
             />
           </div>
           <div>
-            <button onClick={onCancelButtonHandler}>
-              <h5>취소</h5>
-            </button>
-            <button onClick={onUpdateButtonHandler}>
-              <h5>저장</h5>
-            </button>
+            <button onClick={onCancelButtonHandler}>취소</button>
+            <button onClick={onUpdateButtonHandler}>저장</button>
           </div>
         </>
       ) : (
         <>
-          <div>
-            <div>{comment.username}</div>
-            <div>{comment.content}</div>
-          </div>
+          {
+            <div>
+              {/* <div>{id}</div> */}
+              <div>{text}</div>
+            </div>
+          }
 
           <div>
             <button
-              disabled={isGlobalEditmode}
+              // disabled={isGlobalEditmode}
               onClick={onChangeEditButtonHandler}
-            ></button>
+            >
+              수정
+            </button>
             <button
               onClick={onDeleteButtonHandler}
-              disabled={isGlobalEditmode}
-            ></button>
+              // disabled={isGlobalEditmode}
+            >
+              삭제
+            </button>
           </div>
         </>
       )}

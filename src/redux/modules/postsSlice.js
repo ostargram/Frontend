@@ -12,8 +12,13 @@ export const __getPostThunk = createAsyncThunk(
       const { data } = await axiosInstance.get(`/posts/${arg}`);
       /*  const { data } = await axios.get(
         `${"http://localhost:3001"}/posts/${arg}`
+
       ); */
-      console.log("상세 글", data);
+
+      //);
+      // console.log("상세 글", data);
+      //return thunkAPI.fulfillWithValue(data);
+      // 백엔드 서버랑은 아래
       return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -108,8 +113,13 @@ export const __updatePostThunk = createAsyncThunk(
   "UPDATE_POST",
   async (arg, thunkAPI) => {
     try {
-      axiosInstance.patch(`/posts/${arg.id}`, arg);
+      //const postId = arg.postId;
+      const content = arg.content;
+      const title = arg.title;
+      axiosInstance.put(`/posts/${arg.id}`, { content, title });
+      //분해해서 보내는 법
       //axios.patch(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
+      //console.log(postId);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
@@ -157,7 +167,7 @@ export const postSlice = createSlice({
   },
   extraReducers: {
     // 글작성 post
-    [__addLike.pending]: (state) => {
+    /*     [__addLike.pending]: (state) => {
       state.isSuccess = false;
       state.isLoading = true;
     },
@@ -169,7 +179,7 @@ export const postSlice = createSlice({
     [__addLike.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    },
+    }, */
 
     // 전체 게시물 get
     [__getPostsThunk.fulfilled]: (state, action) => {

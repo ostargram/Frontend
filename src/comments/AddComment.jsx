@@ -17,7 +17,7 @@ const AddComment = () => {
     if (comment.content.trim() === "") {
       return alert("모든 항목을 입력해주세요.");
     }
-    dispatch(__addComment({ postId: id, ...comment }));
+    dispatch(__addComment({ postId: id, content: comment.content }));
     setComment({
       content: "",
     });

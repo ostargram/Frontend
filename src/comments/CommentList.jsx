@@ -3,15 +3,22 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { __getCommentsByPostId } from "../redux/modules/commentsSlice";
+import { __getPostsThunk } from "../redux/modules/postsSlice";
 import Comment from "./Comment";
 import AddComment from "./AddComment";
 
-const CommentList = () => {
+const CommentList = ({ list }) => {
+  console.log(1111, list);
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isShow, setisShow] = useState(false);
-  const data = useSelector((state) => state.commentlist.comment);
-  console.log(data);
+  const { isLoading, posts, error } = useSelector((state) => state.posts);
+
+  /*   const data = useSelector(
+    (state) => state.commentlist.commentsByPostId.comment
+    
+  ); */
+  ///console.log(data);
 
   useEffect(() => {
     if (isShow) {
@@ -30,8 +37,8 @@ const CommentList = () => {
       </StToggleContainer>
       <AddComment />
       <StCommentList>
-        {data?.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
+        {list?.map((comments) => (
+          <Comment key={comments.id} text={comments.text} id={comments.id} />
         ))}
       </StCommentList>
     </StContainer>

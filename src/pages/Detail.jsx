@@ -5,7 +5,7 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import { __getPostThunk, __updatePostThunk } from "../redux/modules/postsSlice";
 import CommentList from "../comments/CommentList";
-
+import styled from "styled-components";
 const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -16,7 +16,7 @@ const Detail = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [updatedPost, setUpdatePost] = useState("");
   const post = useSelector((state) => state.posts.post);
-  // console.log("게시글 ", post);
+  console.log("게시글 ", post.comments);
 
   useEffect(() => {
     dispatch(__getPostThunk(id));
@@ -38,8 +38,10 @@ const Detail = () => {
     }
     dispatch(
       __updatePostThunk({
-        ...post,
+        //...post,
+        id: post.id,
         content: updatedPost,
+        title: post.title,
       })
     );
     setIsEditMode(false);
@@ -52,57 +54,113 @@ const Detail = () => {
         {/* 수정하기모드가 아니면서 이전으로 버튼이 있다면 아랫줄 실행  */}
         {!isEditMode && (
           <div>
-            <img src={post.image} />
-            id: ({post?.id})
-            <button
+            <StHidden>id: ({post?.id})</StHidden>
+
+            <StButton
               size="24"
               onClick={() => {
                 navigate("/Home");
               }}
             >
               이전으로
-            </button>
+            </StButton>
           </div>
         )}
-        <div>{post?.title}</div>
-        <div>
+
+        <StH1>{post?.title}</StH1>
+
+        <Stimg src={post.image} />
+        <StDiv1>
           {isEditMode ? (
             <>
-              <textarea
-                name="content"
-                rows="10"
-                maxLength={100}
-                value={updatedPost}
-                onChange={(event) => {
-                  setUpdatePost(event.target.value);
-                }}
-              />
+              <div>
+                <STtextarea
+                  name="content"
+                  rows="10"
+                  maxLength={100}
+                  value={updatedPost}
+                  onChange={(event) => {
+                    setUpdatePost(event.target.value);
+                  }}
+                />
+              </div>
             </>
           ) : (
             <div>{post?.content}</div>
           )}
-
           <div>
             {isEditMode ? (
-              <button size="large" onClick={onSaveButtonHandler}>
+              <StButton2 size="large" onClick={onSaveButtonHandler}>
                 저장
-              </button>
+              </StButton2>
             ) : (
-              <button
+              <StButton2
                 size="large"
                 onClick={() => {
                   setIsEditMode(true);
                 }}
               >
                 수정
-              </button>
+              </StButton2>
             )}
           </div>
-        </div>
-        {!isEditMode && <CommentList />}
+        </StDiv1>
+        {!isEditMode && <CommentList list={post.comments} />}
       </Layout>
     </div>
   );
 };
 
 export default Detail;
+
+const Stimg = styled.img`
+  width: 600px;
+  height: 550px;
+  margin-left: 300px;
+  margin-top: 30px;
+  float: left;
+  display: flex;
+  align-items: center;
+`;
+const StButton = styled.button`
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+
+  margin-left: 90%;
+  &:hover {
+    background: #b075fd;
+    color: white;
+    transition: 0.5s;
+  }
+`;
+const StH1 = styled.h1`
+  margin-left: 45%;
+`;
+const StDiv1 = styled.div`
+  margin-top: 55%;
+  margin-left: 42%;
+`;
+const StButton2 = styled.button`
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+
+  margin-left: 40%;
+  &:hover {
+    background: #b075fd;
+    color: white;
+    transition: 0.5s;
+  }
+`;
+
+const STtextarea = styled.textarea`
+  width: 450px;
+`;
+const StHidden = styled.div`
+  display: none;
+`;

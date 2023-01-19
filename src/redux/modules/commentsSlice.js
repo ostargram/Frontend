@@ -1,16 +1,17 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { axiosInstance } from "../../request/request";
 
 // PostId 전체 댓글 GET
 export const __getCommentsByPostId = createAsyncThunk(
   "GET_COMMENT_BY_POST_ID",
   async (arg, thunkAPI) => {
     try {
-      const data = await axios.get(
-        `${"http://localhost:3001"}/commentlist?postId=${arg}`
-      );
-      console.log("(id)전체 댓글", data);
-      return thunkAPI.fulfillWithValue(data.data);
+      const text = arg.content;
+
+      const { data } = await axiosInstance.get(`/posts/${arg}`, { text });
+      console.log(data);
+      return thunkAPI.fulfillWithValue(data.comments);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -22,7 +23,8 @@ export const __deleteComment = createAsyncThunk(
   "DELETE_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      await axios.delete(`${"http://localhost:3001"}/commentlist/${arg}`);
+      axiosInstance.delete(`/comments/${arg}`);
+      //await axios.delete(`${"http://localhost:3001"}/commentlist/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -35,7 +37,9 @@ export const __updateComment = createAsyncThunk(
   "UPDATE_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      axios.patch(`${"http://localhost:3001"}/commentlist/${arg.id}`, arg);
+      const text = arg.text;
+      const data = axiosInstance.put(`/comments/${arg.id}`, { text });
+      console.log(arg.content);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -48,11 +52,11 @@ export const __addComment = createAsyncThunk(
   "ADD_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.post(
-        `${"http://localhost:3001"}/commentlist`,
-        arg
-      );
-      console.log("글 작성", data);
+      const text = arg.content;
+      const data = await axiosInstance.post(`/posts/${arg.postId}/comments`, {
+        text,
+      });
+      console.log(text);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -110,8 +114,8 @@ export const commentsSlice = createSlice({
     },
     [__getCommentsByPostId.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      state.commentsByPostId.comment = action.payload;
-      console.log("풀필드", state.commentsByPostId.comment);
+      state.commentsByPostId.comments = action.payload;
+      console.log("풀필드", state.commentsByPostId.comments);
     },
     [__getCommentsByPostId.rejected]: (state, action) => {
       state.commentsByPostId.isLoading = false;
@@ -127,7 +131,7 @@ export const commentsSlice = createSlice({
       const target = state.commentsByPostId.comment.findIndex(
         (comment) => comment.id === action.payload
       );
-      state.commentsByPostId.data.splice(target, 1);
+      state.commentsByPostId.comment.splice(target, 1);
     },
     [__deleteComment.rejected]: (state, action) => {
       state.commentsByPostId.isLoading = false;
@@ -143,7 +147,7 @@ export const commentsSlice = createSlice({
         (comment) => comment.id === action.payload.id
       );
       state.isLoading = false;
-      state.commentsByPostId.data.splice(target, 1, action.payload);
+      state.commentsByPostId.comment.splice(target, 1, action.payload);
     },
     [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;

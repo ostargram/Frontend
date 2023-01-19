@@ -104,8 +104,9 @@ const StCard = styled.div`
 `;
 
 const ViewImg = styled.div`
-  width: 130px;
-  height: 130px;
+  margin-top: 3%;
+  width: 320px;
+  height: 250px;
   /* border: 1px solid red; */
   position: absolute;
   img {
@@ -113,8 +114,9 @@ const ViewImg = styled.div`
     justify-content: center;
     width: 100%;
     height: 100%;
-    border-radius: 50%;
+    border-radius: 5%;
     position: absolute;
+    object-fit: cover;
   }
 `;
 
@@ -122,10 +124,11 @@ const StButton = styled.button`
   border: none;
   height: 40px;
   cursor: pointer;
+  margin: 40px;
   border-radius: 10px;
   width: 120px;
   font-weight: 700;
-  margin: 5px;
+  margin-top: 70%;
   &:hover {
     background: #b075fd;
     color: white;
