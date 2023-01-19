@@ -35,7 +35,9 @@ const PostCard = ({ post }) => {
   return (
     <StCard>
       <h2>{post.title}</h2>
-
+      <ViewImg>
+        <img src={post.image} />
+      </ViewImg>
       <div>
         <StButton
           type="button"
@@ -99,6 +101,21 @@ const StCard = styled.div`
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
+`;
+
+const ViewImg = styled.div`
+  width: 130px;
+  height: 130px;
+  /* border: 1px solid red; */
+  position: absolute;
+  img {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+  }
 `;
 
 const StButton = styled.button`
