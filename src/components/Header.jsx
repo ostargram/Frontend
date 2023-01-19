@@ -53,4 +53,9 @@ const StButtons = styled.div`
   align-items: center;
   padding-left: 40px;
   border-radius: 10px;
+  &:hover {
+    background: #d675fd;
+    color: white;
+    transition: 0.5s;
+  }
 `;

@@ -9,11 +9,11 @@ export const __getPostThunk = createAsyncThunk(
   "GET_POST",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axiosInstance.get(`/posts/${arg}`);
-      const { data } = await axios.get(
-        `${"http://localhost:3001"}/posts/${arg}`
-      );
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = await axiosInstance.get(`/posts/${arg}`);
+      /*   const { data } = await axios.get(
+        `${"http://localhost:3001"}/posts/${arg}` */
+      //);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -25,12 +25,12 @@ export const __addPostThunk = createAsyncThunk(
   "ADD_POST",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axiosInstance.post(
-      //   `/posts`,
-      //   arg
-      const { data } = await axios.post(
-        `${"http://localhost:3001"}/posts/`,
+      const { data } = await axiosInstance.post(
+        `/posts`,
         arg
+        /*      const { data } = await axios.post(
+        `${"http://localhost:3001"}/posts/`,
+        arg */
       );
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
@@ -45,11 +45,8 @@ export const __deletePostThunk = createAsyncThunk(
   "DELETE_POST",
   async (arg, thunkAPI) => {
     try {
-      // axiosInstance.delete(
-      //   `/posts/${arg}`
-
-      // );
-      axios.delete(`${"http://localhost:3001"}/posts/${arg}`);
+      axiosInstance.delete(`/posts/${arg}`);
+      //axios.delete(`${"http://localhost:3001"}/posts/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -62,11 +59,11 @@ export const __getPostsThunk = createAsyncThunk(
   "GET_POSTS",
   async (_, thunkAPI) => {
     try {
-      // const { data } = await axiosInstance.get("/posts");
-      const { data } = await axios.get(`${"http://localhost:3001"}/posts/`);
-      console.log(data);
-      // return thunkAPI.fulfillWithValue(data.posts);
-      return thunkAPI.fulfillWithValue(data);
+      const { data } = await axiosInstance.get("/posts");
+      /* const { data } = await axios.get(`${"http://localhost:3001"}/posts/`);
+      console.log(data); */
+
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -78,8 +75,9 @@ export const __updatePostThunk = createAsyncThunk(
   "UPDATE_POST",
   async (arg, thunkAPI) => {
     try {
-      // axiosInstance.patch(`/posts/${arg.id}`, arg);
-      axios.post(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
+      axiosInstance.put(`/posts/${arg.id}`, arg);
+      //axios.post(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
+      console.log(arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);

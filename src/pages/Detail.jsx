@@ -28,9 +28,9 @@ const Detail = () => {
   //   return () => dispatch(clearPost());
   // }, [dispatch, id]);
 
-  // useEffect(() => {
-  //   setUpdatePost(post.body);
-  // }, [post]);
+  useEffect(() => {
+    setUpdatePost(post.content);
+  }, [post]);
 
   const onSaveButtonHandler = () => {
     if (updatedPost.trim() === "") {
@@ -73,10 +73,10 @@ const Detail = () => {
           {isEditMode ? (
             <>
               <textarea
-                name="body"
+                name="content"
                 rows="10"
                 maxLength={100}
-                value
+                value={updatedPost}
                 onChange={(event) => {
                   setUpdatePost(event.target.value);
                 }}
