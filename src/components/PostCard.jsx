@@ -10,14 +10,14 @@ const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [like, setLike] = useState(false, 0);
+  // const [like, setLike] = useState(false, 0);
 
   // //좋아요 버튼 포스트 요청
   // const onClickLike = () => {
   //   dispatch(_postLike(params));
   // };
 
-  const likeClick = () => {
+  /*   const likeClick = () => {
     // ***
     if (like) {
       setLike(false);
@@ -26,7 +26,7 @@ const PostCard = ({ post }) => {
       setLike(true);
       // 좋아요 해제하면 firebase, redux에 like_cnt - 1
     }
-  };
+  }; */
 
   const onDeleteHandler = () => {
     dispatch(__deletePostThunk(post.id));
@@ -61,7 +61,7 @@ const PostCard = ({ post }) => {
         >
           자세히 보기
         </StButton>
-        {!setLike ? (
+        {/*       {!setLike ? (
           <HiOutlineHeart size="50" color="#e22c2c" />
         ) : (
           <div>
@@ -74,7 +74,7 @@ const PostCard = ({ post }) => {
             />
             {like}
           </div>
-        )}
+        )} */}
       </div>
     </StCard>
   );

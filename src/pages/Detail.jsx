@@ -52,6 +52,7 @@ const Detail = () => {
         {/* 수정하기모드가 아니면서 이전으로 버튼이 있다면 아랫줄 실행  */}
         {!isEditMode && (
           <div>
+            <img src={post.image} />
             id: ({post?.id})
             <button
               size="24"

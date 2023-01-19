@@ -9,12 +9,12 @@ export const __getPostThunk = createAsyncThunk(
   "GET_POST",
   async (arg, thunkAPI) => {
     try {
-      // const { data } = await axiosInstance.get(`/posts/${arg}`);
-      const { data } = await axios.get(
+      const { data } = await axiosInstance.get(`/posts/${arg}`);
+      /*  const { data } = await axios.get(
         `${"http://localhost:3001"}/posts/${arg}`
-      );
+      ); */
       console.log("상세 글", data);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -53,18 +53,15 @@ export const __addPostThunk = createAsyncThunk(
     //   `/posts`,
     //   formData,
     try {
-      const { data } = await axios.post(
-        `${"http://localhost:3001"}/posts/`,
+      /*    const { data } = await axios.post(
+             `${"http://localhost:3001"}/posts/`,
         arg
-      );
-      /*  const { data } = await axiosInstance.post(
-        `/posts`,
-        arg,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-      Authorization: 필요하시다면 주석처리 풀기
-      "로그인토큰"
-      }); */
+      ); */
+      const { data } = await axiosInstance.post(`/posts`, arg, {
+        headers: { "Content-Type": "multipart/form-data" },
+        /*  Authorization: 필요하시다면 주석처리 풀기
+      "로그인토큰" */
+      });
       // return thunkAPI.fulfillWithValue(data.data);
       console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
@@ -79,8 +76,8 @@ export const __deletePostThunk = createAsyncThunk(
   "DELETE_POST",
   async (arg, thunkAPI) => {
     try {
-      // axiosInstance.delete(`/posts/${arg}`);
-      axios.delete(`${"http://localhost:3001"}/posts/${arg}`);
+      axiosInstance.delete(`/posts/${arg}`);
+      //axios.delete(`${"http://localhost:3001"}/posts/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -93,13 +90,13 @@ export const __getPostsThunk = createAsyncThunk(
   "GET_POSTS",
   async (_, thunkAPI) => {
     try {
-      // const { data } = await axiosInstance.get("/posts");
-      const { data } = await axios.get(`${"http://localhost:3001"}/posts/`);
+      const { data } = await axiosInstance.get("/posts");
+      //const { data } = await axios.get(`${"http://localhost:3001"}/posts/`);
       console.log(data);
 
       // 백엔드 서버와 연결시
-      // return thunkAPI.fulfillWithValue(data.data);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
+      //return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -111,14 +108,27 @@ export const __updatePostThunk = createAsyncThunk(
   "UPDATE_POST",
   async (arg, thunkAPI) => {
     try {
-      // axiosInstance.patch(`/posts/${arg.id}`, arg);
-      axios.patch(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
+      axiosInstance.patch(`/posts/${arg.id}`, arg);
+      //axios.patch(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
     }
   }
 );
+
+// 좋아요 post
+export const __addLike = createAsyncThunk("ADD_like", async (arg, thunkAPI) => {
+  try {
+    const { data } = await axios.post(
+      axiosInstance.post(`/posts/${arg.id}/likes`)
+    );
+    console.log("좋아요", data);
+    return thunkAPI.fulfillWithValue(data);
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e);
+  }
+});
 
 const initialState = {
   posts: [],
@@ -146,6 +156,21 @@ export const postSlice = createSlice({
     //  },
   },
   extraReducers: {
+    // 글작성 post
+    [__addLike.pending]: (state) => {
+      state.isSuccess = false;
+      state.isLoading = true;
+    },
+    [__addLike.fulfilled]: (state, action) => {
+      state.isSuccess = true;
+      state.isLoading = false;
+      state.posts.push(action.payload);
+    },
+    [__addLike.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
     // 전체 게시물 get
     [__getPostsThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
