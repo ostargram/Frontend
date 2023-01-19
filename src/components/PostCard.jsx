@@ -35,46 +35,45 @@ const PostCard = ({ post }) => {
   return (
     <StCard>
       <h2>{post.title}</h2>
-      <StButton
-        type="button"
-        onClick={(event) => {
-          event.stopPropagation();
-          const result = window.confirm("이 게시물을 지울까요?");
-          if (result) {
-            return onDeleteHandler();
-          } else {
-            return;
-          }
-        }}
-      >
-        삭제하기
-      </StButton>
-      <StButton
-        type="button"
-        onClick={() => {
-          navigate(`/Detail/${post.id}`);
-        }}
-      >
-        자세히 보기
-      </StButton>
-      {/* <span onClick={onClickLike}>
-              {detailPost?.likeCheck ? <FaThumbsUp /> : <FaRegThumbsUp />}
-            </span> */}
 
-      {setLike ? (
-        <HiOutlineHeart size="50" color="#e22c2c" />
-      ) : (
-        <div>
-          <HiHeart
-            size="50"
-            color="#e22c2c"
-            // onClick={() => {
-            //   setLike(like + 1);
-            // }}
-          />
-          {like}
-        </div>
-      )}
+      <div>
+        <StButton
+          type="button"
+          onClick={(event) => {
+            event.stopPropagation();
+            const result = window.confirm("이 게시물을 지울까요?");
+            if (result) {
+              return onDeleteHandler();
+            } else {
+              return;
+            }
+          }}
+        >
+          삭제하기
+        </StButton>
+        <StButton
+          type="button"
+          onClick={() => {
+            navigate(`/Detail/${post.id}`);
+          }}
+        >
+          자세히 보기
+        </StButton>
+        {!setLike ? (
+          <HiOutlineHeart size="50" color="#e22c2c" />
+        ) : (
+          <div>
+            <HiHeart
+              size="20"
+              color="#e22c2c"
+              onClick={() => {
+                setLike(like + 1);
+              }}
+            />
+            {like}
+          </div>
+        )}
+      </div>
     </StCard>
   );
 };
@@ -92,9 +91,13 @@ export default PostCard;
 // `;
 
 const StCard = styled.div`
+  width: 400px;
+  height: 450px;
+  margin-top: 30px;
+  float: left;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   flex-wrap: nowrap;
 `;
 
@@ -103,7 +106,12 @@ const StButton = styled.button`
   height: 40px;
   cursor: pointer;
   border-radius: 10px;
-  width: 140px;
-
+  width: 120px;
   font-weight: 700;
+  margin: 5px;
+  &:hover {
+    background: #b075fd;
+    color: white;
+    transition: 0.5s;
+  }
 `;

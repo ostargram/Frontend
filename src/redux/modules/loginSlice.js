@@ -35,6 +35,22 @@ export const __postUser = createAsyncThunk(
   }
 );
 
+//로그아웃 시키기
+export const __logoutUser = createAsyncThunk(
+  "logout",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await axiosInstance.post("/users/logout", payload, {
+        withCredentials: true,
+      });
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      console.log(error);
+    }
+    return thunkAPI.rejectWithValue();
+  }
+);
+
 //로그인 POST요청
 export const __postLogin = createAsyncThunk(
   "login",
@@ -113,6 +129,18 @@ const userList = createSlice({
       state.isLoading = false;
       state.isLogin = true;
       localStorage.setItem("userinfo", JSON.stringify(action.payload));
+    },
+    [__logoutUser.pending]: (state) => {
+      //보내는 도중, 진행중
+      state.isLoading = true;
+    },
+    [__logoutUser.fulfilled]: (state, action) => {
+      //연결후
+      state.isLoading = false;
+    },
+    [__logoutUser.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
     /*     [__postLogin.rejected]: (state, action) => {
       state.isLoading = false;

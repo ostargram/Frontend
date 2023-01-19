@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Layout from "../components/Layout";
 import { __getPostsThunk } from "../redux/modules/postsSlice";
 import PostCard from "../components/PostCard.jsx";
+import styled from "styled-components";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -25,37 +26,40 @@ const Home = () => {
     <div>
       <Layout>
         <Header />
-
+        <div>
+          <StButtons
+            onClick={() => {
+              navigate("/Write");
+            }}
+          >
+            Write로 이동
+          </StButtons>
+        </div>
         <div>
           {posts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>
-
-        <button
-          onClick={() => {
-            navigate("/Write");
-          }}
-        >
-          Write로 이동
-        </button>
-        <button
-          onClick={() => {
-            navigate("/");
-          }}
-        >
-          SignIn으로 이동
-        </button>
-        <button
-          onClick={() => {
-            navigate("/SignUp");
-          }}
-        >
-          SignUp으로 이동
-        </button>
       </Layout>
     </div>
   );
 };
 
 export default Home;
+
+const StButtons = styled.button`
+  border: 1px solid #ddd;
+  height: 50px;
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 92%;
+  padding-left: 15px;
+  border-radius: 10px;
+  &:hover {
+    background: #b075fd;
+    color: white;
+    transition: 0.5s;
+  }
+`;
