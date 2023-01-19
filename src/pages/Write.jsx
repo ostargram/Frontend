@@ -16,8 +16,10 @@ const Write = () => {
   const [post, setPost] = useState({
     title: "",
     content: "",
-    file: "",
+    image: "",
   });
+
+  //image -> file변수명 바꿈 명세서대로 바꿔줬어야함
 
   const [image, setImage] = useState();
   //   {
@@ -60,7 +62,7 @@ const Write = () => {
     setPost({
       ...post,
       [name]: value,
-      file: imageFile,
+      image: imageFile,
     });
   };
 

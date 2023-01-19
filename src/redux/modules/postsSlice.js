@@ -27,15 +27,17 @@ export const __addPostThunk = createAsyncThunk(
   async (arg, thunkAPI) => {
     // 폼데이터로 묶어서 보내기
     const formData = new FormData();
-    const request = {
+    console.log(arg);
+    /* const request = {
       name: arg.name,
       description: arg.description,
       price: arg.price,
     };
     const json = JSON.stringify(request);
-    const blob = new Blob([json], { type: "application/json" });
-    formData.append("image_url", arg.image_url);
-    formData.append("request", blob);
+    const blob = new Blob([json], { type: "application/json" }); */
+    formData.append("title", arg.title);
+    formData.append("content", arg.content);
+    formData.append("image", arg.file);
 
     // 파일 하나하나 보내기
     // formData.append(“name”, payload.name);
@@ -45,18 +47,20 @@ export const __addPostThunk = createAsyncThunk(
     // formData.append(“image_url”, payload.image_url);
     // formData.append(“request”, blob);
     try {
-      // const { data } = await axiosInstance.post(
-      //   `/posts`,
-      //   arg
-      // const data = await axios.post(`${"http://localhost:3001"}/posts/`, arg, {
-      //   headers: "Content-Type”: “multipart/form-data",
-      // Authorization:
-      // "로그인토큰"
-      // });
-      // return thunkAPI.fulfillWithValue(data.data);
-      const { data } = await axios.post(
+      const { data } = await axiosInstance.post(
+        `/posts`,
+        arg,
+        // const data = await axios.post(`${"http://localhost:3001"}/posts/`, arg, {
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          // Authorization: 필요하시다면 주석처리 풀기
+          // "로그인토큰"
+          // });
+          // return thunkAPI.fulfillWithValue(data.data);
+          /*   const { data } = await axios.post(
         `${"http://localhost:3001"}/posts/`,
-        arg
+        arg */
+        }
       );
       console.log(data);
       return thunkAPI.fulfillWithValue(data);
@@ -85,11 +89,11 @@ export const __getPostsThunk = createAsyncThunk(
   "GET_POSTS",
   async (_, thunkAPI) => {
     try {
-      // const { data } = await axiosInstance.get("/posts");
-      const { data } = await axios.get(`${"http://localhost:3001"}/posts/`);
+      const { data } = await axiosInstance.get("/posts");
+      //const { data } = await axios.get(`${"http://localhost:3001"}/posts/`);
       console.log(data);
       // return thunkAPI.fulfillWithValue(data.posts);
-      return thunkAPI.fulfillWithValue(data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -101,8 +105,8 @@ export const __updatePostThunk = createAsyncThunk(
   "UPDATE_POST",
   async (arg, thunkAPI) => {
     try {
-      // axiosInstance.patch(`/posts/${arg.id}`, arg);
-      axios.post(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
+      axiosInstance.patch(`/posts/${arg.id}`, arg);
+      //axios.post(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (error) {
       return thunkAPI.rejectWithValue(error.code);
