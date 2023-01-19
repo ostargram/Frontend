@@ -13,8 +13,10 @@ export const __getPostThunk = createAsyncThunk(
       const { data } = await axios.get(
         `${"http://localhost:3001"}/posts/${arg}`
       );
-      console.log("상세 글", data);
+      // console.log("상세 글", data);
       return thunkAPI.fulfillWithValue(data);
+      // 백엔드 서버랑은 아래
+      // return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }

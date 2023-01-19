@@ -127,7 +127,7 @@ export const commentsSlice = createSlice({
       const target = state.commentsByPostId.comment.findIndex(
         (comment) => comment.id === action.payload
       );
-      state.commentsByPostId.data.splice(target, 1);
+      state.commentsByPostId.comment.splice(target, 1);
     },
     [__deleteComment.rejected]: (state, action) => {
       state.commentsByPostId.isLoading = false;
@@ -143,7 +143,7 @@ export const commentsSlice = createSlice({
         (comment) => comment.id === action.payload.id
       );
       state.isLoading = false;
-      state.commentsByPostId.data.splice(target, 1, action.payload);
+      state.commentsByPostId.comment.splice(target, 1, action.payload);
     },
     [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;

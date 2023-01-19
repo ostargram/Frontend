@@ -107,25 +107,9 @@
       "title": "퀸스 갬빗",
       "content": "1983년 소설 《The Queen's Gambit》을 원작으로 넷플릭스에서 제작해 2020년 10월 23일에 공개된 7부작 미니시리즈이다.",
       "id": 7
-    },
-    {
-      "title": "제목을 작성하는",
-      "content": "내용을 작성하는\n",
-      "image": "null",
-      "id": 50
     }
   ],
   "commentlist": [
-    {
-      "postId": "5",
-      "content": "추가하기",
-      "id": 1
-    },
-    {
-      "postId": "5",
-      "content": "추가하기 2",
-      "id": 2
-    },
     {
       "postId": "5",
       "content": "댓글추가",
@@ -170,11 +154,6 @@
       "postId": "5",
       "content": "글 작성",
       "id": 11
-    },
-    {
-      "postId": "50",
-      "content": "추가히가",
-      "id": 12
     }
   ]
 }

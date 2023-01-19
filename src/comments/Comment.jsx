@@ -16,11 +16,11 @@ const Comment = ({ comment }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isEdit, setIsEdit] = useState(false);
-  const [updatedComment, setUpdatedComment] = useState("");
+  const [updatedComment, setUpdatedComment] = useState(comment.content);
 
-  const { content } = useSelector((state) => state.getcomment.content);
-  console.log("댓글내용", content);
-  const { isGlobalEditmode } = useSelector((state) => state.comment);
+  // const { content } = useSelector((state) => state.getcomment.content);
+  // console.log("댓글내용", content);
+  // const { isGlobalEditmode } = useSelector((state) => state.commentlist);
 
   const onDeleteButtonHandler = () => {
     const result = window.confirm("삭제하시겠습니까?");
@@ -36,29 +36,31 @@ const Comment = ({ comment }) => {
       __updateComment({
         id: comment.id,
         content: updatedComment,
-        username: comment.username,
+
         postId: id,
       })
     );
     setIsEdit(false);
-    dispatch(globalEditModeToggle(false));
+    // dispatch(globalEditModeToggle(false));
   };
 
   const onChangeEditButtonHandler = () => {
     setIsEdit(true);
-    dispatch(__getComment(comment.id));
-    dispatch(globalEditModeToggle(true));
+    // dispatch(__getComment(comment.id));
+    // dispatch(globalEditModeToggle(true));
   };
 
   const onCancelButtonHandler = () => {
+    setUpdatedComment(comment.content);
     setIsEdit(false);
+
     // dispatch(clearComment());
-    dispatch(globalEditModeToggle(false));
+    // dispatch(globalEditModeToggle(false));
   };
 
-  useEffect(() => {
-    setUpdatedComment(content);
-  }, [content]);
+  // useEffect(() => {
+  //   setUpdatedComment(content);
+  // }, [content]);
 
   return (
     <div>
@@ -75,12 +77,8 @@ const Comment = ({ comment }) => {
             />
           </div>
           <div>
-            <button onClick={onCancelButtonHandler}>
-              <h5>취소</h5>
-            </button>
-            <button onClick={onUpdateButtonHandler}>
-              <h5>저장</h5>
-            </button>
+            <button onClick={onCancelButtonHandler}>취소</button>
+            <button onClick={onUpdateButtonHandler}>저장</button>
           </div>
         </>
       ) : (
@@ -92,13 +90,17 @@ const Comment = ({ comment }) => {
 
           <div>
             <button
-              disabled={isGlobalEditmode}
+              // disabled={isGlobalEditmode}
               onClick={onChangeEditButtonHandler}
-            ></button>
+            >
+              수정
+            </button>
             <button
               onClick={onDeleteButtonHandler}
-              disabled={isGlobalEditmode}
-            ></button>
+              // disabled={isGlobalEditmode}
+            >
+              삭제
+            </button>
           </div>
         </>
       )}
