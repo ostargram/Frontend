@@ -109,7 +109,10 @@
       "id": 7
     },
     {
-      "id": 8
+      "title": "제목을 작성하는",
+      "content": "내용을 작성하는\n",
+      "image": "null",
+      "id": 50
     }
   ],
   "commentlist": [
@@ -167,6 +170,11 @@
       "postId": "5",
       "content": "글 작성",
       "id": 11
+    },
+    {
+      "postId": "50",
+      "content": "추가히가",
+      "id": 12
     }
   ]
 }

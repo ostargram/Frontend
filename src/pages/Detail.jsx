@@ -27,6 +27,7 @@ const Detail = () => {
   //   return () => dispatch(clearPost());
   // }, [dispatch, id]);
 
+  // undefined??
   useEffect(() => {
     setUpdatePost(post.content);
   }, [post]);
