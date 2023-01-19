@@ -48,6 +48,12 @@ export const __addPostThunk = createAsyncThunk(
       // const { data } = await axiosInstance.post(
       //   `/posts`,
       //   arg
+      // const data = await axios.post(`${"http://localhost:3001"}/posts/`, arg, {
+      //   headers: "Content-Type”: “multipart/form-data",
+      // Authorization:
+      // "로그인토큰"
+      // });
+      // return thunkAPI.fulfillWithValue(data.data);
       const { data } = await axios.post(
         `${"http://localhost:3001"}/posts/`,
         arg
