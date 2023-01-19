@@ -12,6 +12,11 @@ const PostCard = ({ post }) => {
 
   const [like, setLike] = useState(false, 0);
 
+  // //좋아요 버튼 포스트 요청
+  // const onClickLike = () => {
+  //   dispatch(_postLike(params));
+  // };
+
   const likeClick = () => {
     // ***
     if (like) {
@@ -52,17 +57,20 @@ const PostCard = ({ post }) => {
       >
         자세히 보기
       </StButton>
+      {/* <span onClick={onClickLike}>
+              {detailPost?.likeCheck ? <FaThumbsUp /> : <FaRegThumbsUp />}
+            </span> */}
 
-      {!setLike ? (
+      {setLike ? (
         <HiOutlineHeart size="50" color="#e22c2c" />
       ) : (
         <div>
           <HiHeart
             size="50"
             color="#e22c2c"
-            onClick={() => {
-              setLike(like + 1);
-            }}
+            // onClick={() => {
+            //   setLike(like + 1);
+            // }}
           />
           {like}
         </div>

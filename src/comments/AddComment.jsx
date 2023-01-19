@@ -17,7 +17,7 @@ const AddComment = () => {
     if (comment.content.trim() === "") {
       return alert("모든 항목을 입력해주세요.");
     }
-    dispatch(__addComment({ todoId: id, ...comment }));
+    dispatch(__addComment({ postId: id, ...comment }));
     setComment({
       content: "",
     });
@@ -33,6 +33,7 @@ const AddComment = () => {
 
   return (
     <form onSubmit={onAddCommentButtonHandler}>
+      <div></div>
       <input
         placeholder="댓글을 추가하세요. (100자 이내)"
         value={comment.content}

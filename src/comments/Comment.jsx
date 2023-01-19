@@ -18,7 +18,8 @@ const Comment = ({ comment }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [updatedComment, setUpdatedComment] = useState("");
 
-  const { content } = useSelector((state) => state.comment.data);
+  const { content } = useSelector((state) => state.getcomment.content);
+  console.log("댓글내용", content);
   const { isGlobalEditmode } = useSelector((state) => state.comment);
 
   const onDeleteButtonHandler = () => {
@@ -36,7 +37,7 @@ const Comment = ({ comment }) => {
         id: comment.id,
         content: updatedComment,
         username: comment.username,
-        todoId: id,
+        postId: id,
       })
     );
     setIsEdit(false);
@@ -51,7 +52,7 @@ const Comment = ({ comment }) => {
 
   const onCancelButtonHandler = () => {
     setIsEdit(false);
-    dispatch(clearComment());
+    // dispatch(clearComment());
     dispatch(globalEditModeToggle(false));
   };
 

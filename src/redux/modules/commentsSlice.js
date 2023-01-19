@@ -1,30 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// 전체 댓글 GET
-export const __getCommentListThunk = createAsyncThunk(
-  "GET_COMMENTLIST",
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await axios.get(
-        `${"http://localhost:3001"}/commentlist`
-      );
-      return thunkAPI.fulfillWithValue(data);
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.code);
-    }
-  }
-);
-
-// 동일 아이디 GET
+// PostId 전체 댓글 GET
 export const __getCommentsByPostId = createAsyncThunk(
   "GET_COMMENT_BY_POST_ID",
   async (arg, thunkAPI) => {
     try {
-      const { data } = await axios.get(
+      const data = await axios.get(
         `${"http://localhost:3001"}/commentlist?postId=${arg}`
       );
-      return thunkAPI.fulfillWithValue(data);
+      console.log("(id)전체 댓글", data);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
     }
@@ -66,6 +52,7 @@ export const __addComment = createAsyncThunk(
         `${"http://localhost:3001"}/commentlist`,
         arg
       );
+      console.log("글 작성", data);
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
@@ -79,10 +66,11 @@ export const __getComment = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_TODOS}/comment/${arg}`
+        `${"http://localhost:3001"}/commentlist/${arg}`
       );
       return thunkAPI.fulfillWithValue(data);
     } catch (e) {
+      // console.log(e.response)
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -90,17 +78,15 @@ export const __getComment = createAsyncThunk(
 
 const initialState = {
   commentlist: [],
-  data: {
+  comments: {
     content: "",
-    username: "",
-    id: 0,
-    todoId: 0,
+    postId: 0,
   },
   isLoading: false,
   error: null,
   isGlobalEditmode: false,
-  commentsByTodoId: {
-    data: [],
+  commentsByPostId: {
+    comment: [],
     isLoading: false,
     error: null,
   },
@@ -110,34 +96,22 @@ export const commentsSlice = createSlice({
   name: "commentlist",
   initialState,
   reducers: {
-    clearComment: (state) => {
-      state.data.content = "";
-    },
+    // clearComment: (state) => {
+    //   state.comments.content = "";
+    // },
     globalEditModeToggle: (state, action) => {
       state.isGlobalEditmode = action.payload;
     },
   },
   extraReducers: {
-    // 전체 댓글 조회
-    [__getCommentListThunk.pending]: (state) => {
-      state.commentlist.isLoading = true;
-    },
-    [__getCommentListThunk.fulfilled]: (state, action) => {
-      state.commentlist.isLoading = false;
-      state.commentlist.data = action.payload;
-    },
-    [__getCommentListThunk.rejected]: (state, action) => {
-      state.commentlist.isLoading = false;
-      state.commentlist.error = action.payload;
-    },
-
-    // 댓글 조회 (todoId)
+    // 댓글 조회 (postId)
     [__getCommentsByPostId.pending]: (state) => {
       state.commentsByPostId.isLoading = true;
     },
     [__getCommentsByPostId.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      state.commentsByPostId.data = action.payload;
+      state.commentsByPostId.comment = action.payload;
+      console.log("풀필드", state.commentsByPostId.comment);
     },
     [__getCommentsByPostId.rejected]: (state, action) => {
       state.commentsByPostId.isLoading = false;
@@ -146,18 +120,18 @@ export const commentsSlice = createSlice({
 
     // 댓글 삭제
     [__deleteComment.pending]: (state) => {
-      state.commentsByTodoId.isLoading = true;
+      state.commentsByPostId.isLoading = true;
     },
     [__deleteComment.fulfilled]: (state, action) => {
-      state.commentsByTodoId.isLoading = false;
-      const target = state.commentsByTodoId.data.findIndex(
+      state.commentsByPostId.isLoading = false;
+      const target = state.commentsByPostId.comment.findIndex(
         (comment) => comment.id === action.payload
       );
-      state.commentsByTodoId.data.splice(target, 1);
+      state.commentsByPostId.data.splice(target, 1);
     },
     [__deleteComment.rejected]: (state, action) => {
-      state.commentsByTodoId.isLoading = false;
-      state.commentsByTodoId.error = action.payload;
+      state.commentsByPostId.isLoading = false;
+      state.commentsByPostId.error = action.payload;
     },
 
     // 댓글 수정
@@ -165,11 +139,11 @@ export const commentsSlice = createSlice({
       state.isLoading = true;
     },
     [__updateComment.fulfilled]: (state, action) => {
-      const target = state.commentsByTodoId.data.findIndex(
+      const target = state.commentsByPostId.comment.findIndex(
         (comment) => comment.id === action.payload.id
       );
       state.isLoading = false;
-      state.commentsByTodoId.data.splice(target, 1, action.payload);
+      state.commentsByPostId.data.splice(target, 1, action.payload);
     },
     [__updateComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -177,15 +151,16 @@ export const commentsSlice = createSlice({
     },
     // 댓글 추가
     [__addComment.pending]: (state) => {
-      state.commentsByTodoId.isLoading = true;
+      state.commentsByPostId.isLoading = true;
     },
     [__addComment.fulfilled]: (state, action) => {
-      state.commentsByTodoId.isLoading = false;
-      state.commentsByTodoId.data.push(action.payload);
+      state.commentsByPostId.isLoading = false;
+      state.commentsByPostId.comment.push(action.payload);
+      console.log(action.payload);
     },
     [__addComment.rejected]: (state, action) => {
-      state.commentsByTodoId.isLoading = false;
-      state.commentsByTodoId.error = action.payload;
+      state.commentsByPostId.isLoading = false;
+      state.commentsByPostId.error = action.payload;
     },
     [__getComment.pending]: (state, action) => {
       state.isLoading = true;
@@ -193,6 +168,7 @@ export const commentsSlice = createSlice({
     [__getComment.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
+      console.log("누구세요?", action.payload);
     },
     [__getComment.rejected]: (state, action) => {
       state.isLoading = false;
@@ -201,5 +177,5 @@ export const commentsSlice = createSlice({
   },
 });
 
-export const { clearComment, globalEditModeToggle } = commentsSlice.actions;
+export const { globalEditModeToggle } = commentsSlice.actions;
 export default commentsSlice.reducer;

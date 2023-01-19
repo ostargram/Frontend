@@ -16,6 +16,7 @@ const Write = () => {
   const [post, setPost] = useState({
     title: "",
     content: "",
+    file: "",
   });
 
   const [image, setImage] = useState();
@@ -29,8 +30,13 @@ const Write = () => {
   const imageUpLoad = async (e) => {
     imagePreview(e.target.files[0]);
     setImageFile(e.target.files[0]);
+    const imgFile = e.target.files[0];
+    // const formData = new FormData();
+    // formData.append("file", imgFile);
+    // dispatch(__addPostThunk(formData));
   };
 
+  // 이미지 미리보기
   const imagePreview = (fileBlob) => {
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
@@ -54,6 +60,7 @@ const Write = () => {
     setPost({
       ...post,
       [name]: value,
+      file: imageFile,
     });
   };
 

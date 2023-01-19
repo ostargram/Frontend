@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
-import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { __getPostThunk, __updatePostThunk } from "../redux/modules/postsSlice";
 import CommentList from "../comments/CommentList";
 
@@ -28,9 +27,9 @@ const Detail = () => {
   //   return () => dispatch(clearPost());
   // }, [dispatch, id]);
 
-  // useEffect(() => {
-  //   setUpdatePost(post.body);
-  // }, [post]);
+  useEffect(() => {
+    setUpdatePost(post.content);
+  }, [post]);
 
   const onSaveButtonHandler = () => {
     if (updatedPost.trim() === "") {
@@ -49,11 +48,6 @@ const Detail = () => {
     <div>
       <Layout>
         <Header />
-        {/* {setLike ? (
-          <HiOutlineHeart size="50" color="#e22c2c" />
-        ) : (
-          <HiHeart size="50" color="#e22c2c" />
-        )} */}
         {/* 수정하기모드가 아니면서 이전으로 버튼이 있다면 아랫줄 실행  */}
         {!isEditMode && (
           <div>
@@ -73,10 +67,10 @@ const Detail = () => {
           {isEditMode ? (
             <>
               <textarea
-                name="body"
+                name="content"
                 rows="10"
                 maxLength={100}
-                value
+                value={updatedPost}
                 onChange={(event) => {
                   setUpdatePost(event.target.value);
                 }}
