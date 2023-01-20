@@ -83,27 +83,27 @@ const Detail = () => {
         <StDiv1>
           {isEditMode ? (
             <>
-              <div>
-                <STtextarea
-                  name="content"
-                  rows="10"
-                  maxLength={100}
-                  value={updatedPost}
-                  onChange={(event) => {
-                    setUpdatePost(event.target.value);
-                  }}
-                />
-              </div>
+              <STtextarea
+                name="content"
+                rows="10"
+                maxLength={100}
+                value={updatedPost}
+                onChange={(event) => {
+                  setUpdatePost(event.target.value);
+                }}
+              />
             </>
           ) : (
-            <div>{post?.content}</div>
+            <StDiv2>{post?.content}</StDiv2>
           )}
-          <div>
-            {isEditMode ? (
-              <StButton2 size="large" onClick={onSaveButtonHandler}>
-                저장
-              </StButton2>
-            ) : (
+        </StDiv1>
+        <div>
+          {isEditMode ? (
+            <StButton1 size="large" onClick={onSaveButtonHandler}>
+              저장
+            </StButton1>
+          ) : (
+            <div>
               <StBox>
                 <StButton2
                   size="large"
@@ -113,6 +113,8 @@ const Detail = () => {
                 >
                   수정
                 </StButton2>
+              </StBox>
+              <StBox>
                 <StButton2
                   type="button"
                   onClick={(event) => {
@@ -126,11 +128,12 @@ const Detail = () => {
                   }}
                 >
                   삭제하기
-                </StButton2>{" "}
+                </StButton2>
               </StBox>
-            )}
-          </div>
-        </StDiv1>
+            </div>
+          )}
+        </div>
+
         {!isEditMode && <CommentList list={post.comments} />}
       </Layout>
     </div>
@@ -170,7 +173,17 @@ const StDiv1 = styled.div`
   margin-left: 42%;
 `;
 
+const StDiv2 = styled.div`
+  margin-top: 55%;
+  margin-left: 8%;
+`;
+
 const StBox = styled.div`
+  margin-left: 260px;
+  margin-top: 3%;
+  width: 180px;
+  float: left;
+  align-items: center;
   display: flex;
 `;
 
@@ -179,7 +192,8 @@ const StButton2 = styled.button`
   justify-content: space-evenly;
   align-items: center;
   border: none;
-  height: 40px;
+
+  height: 45px;
   cursor: pointer;
   border-radius: 10px;
   width: 120px;
@@ -191,9 +205,27 @@ const StButton2 = styled.button`
     transition: 0.5s;
   }
 `;
+const StButton1 = styled.button`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: none;
 
+  height: 45px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+  margin-top: 12%;
+  margin-left: 45%;
+  &:hover {
+    background: #b075fd;
+    color: white;
+    transition: 0.5s;
+  }
+`;
 const STtextarea = styled.textarea`
   width: 450px;
+  margin: -17.5%;
 `;
 const StHidden = styled.div`
   display: none;
