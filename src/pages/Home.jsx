@@ -12,7 +12,6 @@ const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, posts, error } = useSelector((state) => state.posts);
-  console.log("게시글 전체 조회", posts);
 
   useEffect(() => {
     dispatch(__getPostsThunk());
@@ -34,6 +33,8 @@ const Home = () => {
           >
             Write로 이동
           </StButtons>
+
+          <Reveiw>내가 추천하는 OTT영상 </Reveiw>
         </div>
         <div>
           {posts.map((post) => (
@@ -62,4 +63,7 @@ const StButtons = styled.button`
     color: white;
     transition: 0.5s;
   }
+`;
+const Reveiw = styled.div`
+  margin-left: 40%;
 `;
