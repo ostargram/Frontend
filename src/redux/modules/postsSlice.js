@@ -138,7 +138,7 @@ export const __addLike = createAsyncThunk("ADD_like", async (arg, thunkAPI) => {
   }
 });
 // 좋아요 get요청
-export const __getLike = createAsyncThunk("GET_POST", async (arg, thunkAPI) => {
+/* export const __getLike = createAsyncThunk("GET_POST", async (arg, thunkAPI) => {
   try {
     const { data } = await axiosInstance.get(`/posts/${arg}/likes`);
     console.log(arg);
@@ -146,7 +146,7 @@ export const __getLike = createAsyncThunk("GET_POST", async (arg, thunkAPI) => {
   } catch (e) {
     return thunkAPI.rejectWithValue(e.code);
   }
-});
+}); */
 
 const initialState = {
   posts: [],
@@ -188,7 +188,7 @@ export const postSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
-    [__getLike.fulfilled]: (state, action) => {
+    /*  [__getLike.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
     },
@@ -199,7 +199,7 @@ export const postSlice = createSlice({
     [__getLike.pending]: (state) => {
       state.isLoading = true;
     },
-
+ */
     // 전체 게시물 get
     [__getPostsThunk.fulfilled]: (state, action) => {
       state.isLoading = false;

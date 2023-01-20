@@ -1,70 +1,17 @@
-# Getting Started with Create React App
+# ostargram 프로젝트 소개
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ostargram 프로젝트 소개
 
-## Available Scripts
+- 인스타그램 + OTT
+- 좋아하는 OTT 컨텐츠를 소개하고, 사용자들끼리 공유하고 소통하는 프로젝트
+  [:오른쪽을*가리키는*손\_모양::피부톤-2: ostargram 노션 페이지 바로가기](https://tropical-airplane-e09.notion.site/c14f396a9a8e487f89cf0fd327de7e48)
+  [:오른쪽을*가리키는*손\_모양: API 명세 swagger 버전 바로가기](https://iamhyunjun.shop/swagger-ui/index.html)
+  [:오른쪽을*가리키는*손\_모양: API 명세 notion 버전 바로가기](https://tropical-airplane-e09.notion.site/API-78011fc832244b32a05a0e632ecc9f50)
 
-In the project directory, you can run:
+# [와이어 프레임](https://excalidraw.com/#room=d35a57fea48cfe98d1be,Nuw95qZAHrpx3OlqVX5X2w)
 
-### `yarn start`
+![image](https://user-images.githubusercontent.com/87173870/213646898-f90e0969-81a6-4535-9829-3ab740e4c9ee.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# [ERD](https://www.erdcloud.com/d/iKteCux8oPDvdgPDL)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![image](https://user-images.githubusercontent.com/87173870/213593068-0ba1f43e-e8f8-4992-9f5f-676cb11e38a6.png)

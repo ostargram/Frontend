@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import heart from "../img/heart.png";
 import binheart from "../img/binheart.png";
-import { __addLike, __getLike } from "../redux/modules/postsSlice";
+import { __addLike } from "../redux/modules/postsSlice";
 import { useParams } from "react-router-dom";
 
 const Like = ({ postId }) => {
@@ -11,9 +11,9 @@ const Like = ({ postId }) => {
   const post = useSelector((state) => state.posts.post);
   console.log(post);
   const dispatch = useDispatch();
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(__getLike(id));
-  }, [dispatch]);
+  }, [dispatch]); */
   console.log(id);
   // 아이콘 변경 state
   const [isLiked, setAction] = useState(false);

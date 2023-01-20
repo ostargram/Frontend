@@ -83,7 +83,7 @@ export default PostCard;
 const StCard = styled.div`
   width: 400px;
   height: 450px;
-  margin-top: 30px;
+  margin-top: 10px;
   float: left;
   display: flex;
   flex-direction: column;
@@ -95,6 +95,7 @@ const ViewImg = styled.div`
   margin-top: 3%;
   width: 320px;
   height: 250px;
+  margin-top: 60px;
   /* border: 1px solid red; */
   position: absolute;
   img {
