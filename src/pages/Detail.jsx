@@ -175,7 +175,7 @@ const StDiv1 = styled.div`
 
 const StDiv2 = styled.div`
   margin-top: 55%;
-  margin-left: 8%;
+  margin-right: 26%;
 `;
 
 const StBox = styled.div`

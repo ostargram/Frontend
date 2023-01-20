@@ -81,7 +81,7 @@ export const __deletePostThunk = createAsyncThunk(
   "DELETE_POST",
   async (arg, thunkAPI) => {
     try {
-      axiosInstance.delete(`/posts/${arg}`);
+      await axiosInstance.delete(`/posts/${arg}`);
       //axios.delete(`${"http://localhost:3001"}/posts/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
@@ -116,7 +116,7 @@ export const __updatePostThunk = createAsyncThunk(
       //const postId = arg.postId;
       const content = arg.content;
       const title = arg.title;
-      axiosInstance.put(`/posts/${arg.id}`, { content, title });
+      await axiosInstance.put(`/posts/${arg.id}`, { content, title });
       //분해해서 보내는 법
       //axios.patch(`${"http://localhost:3001"}/posts/${arg.id}`, arg);
       //console.log(postId);
@@ -131,10 +131,20 @@ export const __updatePostThunk = createAsyncThunk(
 export const __addLike = createAsyncThunk("ADD_like", async (arg, thunkAPI) => {
   try {
     console.log(1234, arg);
-    const { data } = axiosInstance.post(`/posts/${arg}/likes`);
+    const { data } = await axiosInstance.post(`/posts/${arg}/likes`);
     return thunkAPI.fulfillWithValue(data);
   } catch (e) {
     return thunkAPI.rejectWithValue(e);
+  }
+});
+// 좋아요 get요청
+export const __getLike = createAsyncThunk("GET_POST", async (arg, thunkAPI) => {
+  try {
+    const { data } = await axiosInstance.get(`/posts/${arg}/likes`);
+    console.log(arg);
+    return thunkAPI.fulfillWithValue(data);
+  } catch (e) {
+    return thunkAPI.rejectWithValue(e.code);
   }
 });
 
@@ -177,6 +187,17 @@ export const postSlice = createSlice({
     [__addLike.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
+    },
+    [__getLike.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.post = action.payload;
+    },
+    [__getLike.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [__getLike.pending]: (state) => {
+      state.isLoading = true;
     },
 
     // 전체 게시물 get

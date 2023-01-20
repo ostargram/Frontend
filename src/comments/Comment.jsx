@@ -11,6 +11,7 @@ import {
   globalEditModeToggle,
   __getComment,
 } from "../redux/modules/commentsSlice";
+import styled from "styled-components";
 
 const Comment = ({ text, id }) => {
   console.log(1234, text, id);
@@ -108,3 +109,19 @@ const Comment = ({ text, id }) => {
 };
 
 export default Comment;
+
+const StButton = styled.button`
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  margin: 120px;
+  border-radius: 10px;
+  width: 120px;
+  font-weight: 700;
+  margin-top: 70%;
+  &:hover {
+    background: #b075fd;
+    color: white;
+    transition: 0.5s;
+  }
+`;

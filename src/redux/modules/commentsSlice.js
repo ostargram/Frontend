@@ -41,10 +41,8 @@ export const __updateComment = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const text = arg.text;
-      const data = axiosInstance.put(`/comments/${arg.id}`, { text });
-      console.log("매개변수", arg);
-      console.log("텍스트라는뎁쇼?", text);
-      console.log("수정의 데이타?", data.data);
+      const data = await axiosInstance.put(`/comments/${arg.id}`, { text });
+      console.log(arg.content);
 
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
