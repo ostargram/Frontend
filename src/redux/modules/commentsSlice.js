@@ -120,7 +120,7 @@ export const commentsSlice = createSlice({
 
     [__getCommentsByPostId.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      state.commentsByPostId = action.payload;
+      state.commentsByPostId.data = action.payload;
       console.log(action.payload);
       // console.log("풀필드", state.post.comments.text);
     },

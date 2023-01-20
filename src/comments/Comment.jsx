@@ -39,7 +39,6 @@ const Comment = ({ text, id }) => {
         text: updatedComment,
       })
     );
-    window.location.reload();
     setIsEdit(false);
     // dispatch(globalEditModeToggle(false));
   };
@@ -70,7 +69,7 @@ const Comment = ({ text, id }) => {
             <StInput
               type="text"
               value={updatedComment}
-              maxlength={50}
+              maxlength={100}
               onChange={(event) => {
                 setUpdatedComment(event.target.value);
               }}
