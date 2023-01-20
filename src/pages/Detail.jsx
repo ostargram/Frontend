@@ -54,6 +54,7 @@ const Detail = () => {
 
   const onDeleteHandler = () => {
     dispatch(__deletePostThunk(post.id));
+    navigate("/Home");
   };
 
   return (
@@ -170,7 +171,7 @@ const StH1 = styled.h1`
 `;
 const StDiv1 = styled.div`
   margin-top: 55%;
-  margin-left: 42%;
+  margin-left: 22%;
 `;
 
 const StDiv2 = styled.div`
@@ -235,9 +236,8 @@ const StButton1 = styled.button`
 `;
 const STtextarea = styled.textarea`
   display: flex;
-  margin: -17.5%;
+
   width: 450px;
-  margin: -17.5%;
 `;
 const StHidden = styled.div`
   display: none;
