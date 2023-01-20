@@ -46,7 +46,7 @@ const SignIn = () => {
     <LoginContainer>
       <LoginFormImg />
       <LoginForm>
-        <StH1>Sign In</StH1>
+        <StH1>로그인</StH1>
         <StIput
           required //아무것도 입력하지 않으면 안되게
           type="text"
@@ -56,7 +56,7 @@ const SignIn = () => {
         ></StIput>
         <StIput
           required //아무것도 입력하지 않으면 안되게
-          type="text"
+          type="password"
           name="password"
           placeholder="password"
           onChange={onChangeLoginHandler}

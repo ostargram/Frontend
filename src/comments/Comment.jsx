@@ -66,7 +66,7 @@ const Comment = ({ text, id }) => {
       {isEdit ? (
         <>
           <div>
-            <input
+            <StInput
               type="text"
               value={updatedComment}
               maxlength={100}
@@ -76,53 +76,63 @@ const Comment = ({ text, id }) => {
             />
           </div>
           <div>
-            <button onClick={onCancelButtonHandler}>취소</button>
-            <button onClick={onUpdateButtonHandler}>저장</button>
+            <StButton onClick={onCancelButtonHandler}>취소</StButton>
+            <StButton onClick={onUpdateButtonHandler}>저장</StButton>
           </div>
         </>
       ) : (
-        <>
-          {
-            <div>
-              {/* <div>{id}</div> */}
-              <div>{text}</div>
-            </div>
-          }
-
-          <div>
-            <button
+        <div>
+          <StDiv>{text}</StDiv>
+          <StDiv1>
+            <StButton
               // disabled={isGlobalEditmode}
               onClick={onChangeEditButtonHandler}
             >
               수정
-            </button>
-            <button
+            </StButton>
+
+            <StButton
               onClick={onDeleteButtonHandler}
               // disabled={isGlobalEditmode}
             >
               삭제
-            </button>
-          </div>
-        </>
+            </StButton>
+          </StDiv1>
+        </div>
       )}
     </div>
   );
 };
-
 export default Comment;
 
 const StButton = styled.button`
   border: none;
   height: 40px;
-  cursor: pointer;
-  margin: 120px;
   border-radius: 10px;
+  margin: 10px;
   width: 120px;
   font-weight: 700;
-  margin-top: 70%;
   &:hover {
     background: #b075fd;
     color: white;
     transition: 0.5s;
   }
+`;
+
+const StDiv = styled.div`
+  margin-left: 30px;
+  margin-top: 40px;
+`;
+
+const StDiv1 = styled.div`
+  margin-left: 10px;
+  margin-top: 20px;
+`;
+const StInput = styled.input`
+  width: 500px;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  margin-left: 20px;
 `;

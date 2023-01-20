@@ -26,15 +26,16 @@ const Home = () => {
       <Layout>
         <Header />
         <div>
-          <StButtons
-            onClick={() => {
-              navigate("/Write");
-            }}
-          >
-            Write로 이동
-          </StButtons>
-
-          <Reveiw>내가 추천하는 OTT영상 </Reveiw>
+          <Reveiw>
+            내가 추천하는 OTT영상
+            <StButtons
+              onClick={() => {
+                navigate("/Write");
+              }}
+            >
+              글 작성
+            </StButtons>
+          </Reveiw>
         </div>
         <div>
           {posts?.map((post) => (
@@ -50,12 +51,10 @@ export default Home;
 
 const StButtons = styled.button`
   border: 1px solid #ddd;
+
   height: 50px;
   width: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 92%;
+  margin-left: 82%;
   padding-left: 15px;
   border-radius: 10px;
   &:hover {
@@ -64,6 +63,6 @@ const StButtons = styled.button`
     transition: 0.5s;
   }
 `;
-const Reveiw = styled.div`
+const Reveiw = styled.h2`
   margin-left: 40%;
 `;
