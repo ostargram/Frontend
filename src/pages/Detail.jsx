@@ -10,6 +10,7 @@ import {
 } from "../redux/modules/postsSlice";
 import CommentList from "../comments/CommentList";
 import styled from "styled-components";
+import Likes from "../components/Likes";
 const Detail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -62,6 +63,7 @@ const Detail = () => {
         {/* 수정하기모드가 아니면서 이전으로 버튼이 있다면 아랫줄 실행  */}
         {!isEditMode && (
           <div>
+            <Likes postId={post.id} />
             <StHidden>id: ({post?.id})</StHidden>
 
             <StButton

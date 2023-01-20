@@ -130,10 +130,8 @@ export const __updatePostThunk = createAsyncThunk(
 // 좋아요 post
 export const __addLike = createAsyncThunk("ADD_like", async (arg, thunkAPI) => {
   try {
-    const { data } = await axios.post(
-      axiosInstance.post(`/posts/${arg.id}/likes`)
-    );
-    console.log("좋아요", data);
+    console.log(1234, arg);
+    const { data } = axiosInstance.post(`/posts/${arg}/likes`);
     return thunkAPI.fulfillWithValue(data);
   } catch (e) {
     return thunkAPI.rejectWithValue(e);
@@ -166,8 +164,8 @@ export const postSlice = createSlice({
     //  },
   },
   extraReducers: {
-    // 글작성 post
-    /*     [__addLike.pending]: (state) => {
+    // 좋아요 post
+    [__addLike.pending]: (state) => {
       state.isSuccess = false;
       state.isLoading = true;
     },
@@ -179,7 +177,7 @@ export const postSlice = createSlice({
     [__addLike.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    }, */
+    },
 
     // 전체 게시물 get
     [__getPostsThunk.fulfilled]: (state, action) => {

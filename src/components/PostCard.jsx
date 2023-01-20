@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { __deletePostThunk } from "../redux/modules/postsSlice";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import { useState } from "react";
+import Likes from "./Likes";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const PostCard = ({ post }) => {
       <ViewImg>
         <img src={post.image} />
       </ViewImg>
+
       <div>
         {/* <StButton
           type="button"
