@@ -83,26 +83,24 @@ const Detail = () => {
         <StDiv1>
           {isEditMode ? (
             <>
-              <div>
-                <STtextarea
-                  name="content"
-                  rows="10"
-                  maxLength={100}
-                  value={updatedPost}
-                  onChange={(event) => {
-                    setUpdatePost(event.target.value);
-                  }}
-                />
-              </div>
+              <STtextarea
+                name="content"
+                rows="10"
+                maxLength={100}
+                value={updatedPost}
+                onChange={(event) => {
+                  setUpdatePost(event.target.value);
+                }}
+              />
             </>
           ) : (
             <div>{post?.content}</div>
           )}
           <div>
             {isEditMode ? (
-              <StButton2 size="large" onClick={onSaveButtonHandler}>
+              <StButton1 size="large" onClick={onSaveButtonHandler}>
                 저장
-              </StButton2>
+              </StButton1>
             ) : (
               <StBox>
                 <StButton2
@@ -174,6 +172,16 @@ const StBox = styled.div`
   display: flex;
 `;
 
+const StButton1 = styled.button`
+  border: none;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 120px;
+  margin-top: 25%;
+  margin-left: 5%;
+`;
+
 const StButton2 = styled.button`
   display: flex;
   justify-content: space-evenly;
@@ -193,6 +201,8 @@ const StButton2 = styled.button`
 `;
 
 const STtextarea = styled.textarea`
+  display: flex;
+  margin: -17.5%;
   width: 450px;
 `;
 const StHidden = styled.div`
