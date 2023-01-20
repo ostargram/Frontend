@@ -23,7 +23,7 @@ export const __deleteComment = createAsyncThunk(
   "DELETE_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      axiosInstance.delete(`/comments/${arg}`);
+      await axiosInstance.delete(`/comments/${arg}`);
       //await axios.delete(`${"http://localhost:3001"}/commentlist/${arg}`);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
@@ -38,7 +38,7 @@ export const __updateComment = createAsyncThunk(
   async (arg, thunkAPI) => {
     try {
       const text = arg.text;
-      const data = axiosInstance.put(`/comments/${arg.id}`, { text });
+      const data = await axiosInstance.put(`/comments/${arg.id}`, { text });
       console.log(arg.content);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {

@@ -37,7 +37,7 @@ const Home = () => {
           <Reveiw>내가 추천하는 OTT영상 </Reveiw>
         </div>
         <div>
-          {posts.map((post) => (
+          {posts?.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>
