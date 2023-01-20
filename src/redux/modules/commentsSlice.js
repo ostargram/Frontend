@@ -114,7 +114,7 @@ export const commentsSlice = createSlice({
     },
     [__getCommentsByPostId.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      state.commentsByPostId.comments = action.payload;
+      state.commentlist.comments = action.payload;
       console.log("풀필드", state.commentsByPostId.comments);
     },
     [__getCommentsByPostId.rejected]: (state, action) => {
@@ -159,7 +159,7 @@ export const commentsSlice = createSlice({
     },
     [__addComment.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      state.commentsByPostId.comment.push(action.payload);
+      state.commentsByPostId.comments.push(action.payload);
       console.log(action.payload);
     },
     [__addComment.rejected]: (state, action) => {

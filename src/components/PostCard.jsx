@@ -39,7 +39,7 @@ const PostCard = ({ post }) => {
         <img src={post.image} />
       </ViewImg>
       <div>
-        <StButton
+        {/* <StButton
           type="button"
           onClick={(event) => {
             event.stopPropagation();
@@ -52,7 +52,7 @@ const PostCard = ({ post }) => {
           }}
         >
           삭제하기
-        </StButton>
+        </StButton> */}
         <StButton
           type="button"
           onClick={() => {
@@ -61,20 +61,6 @@ const PostCard = ({ post }) => {
         >
           자세히 보기
         </StButton>
-        {/*       {!setLike ? (
-          <HiOutlineHeart size="50" color="#e22c2c" />
-        ) : (
-          <div>
-            <HiHeart
-              size="20"
-              color="#e22c2c"
-              onClick={() => {
-                setLike(like + 1);
-              }}
-            />
-            {like}
-          </div>
-        )} */}
       </div>
     </StCard>
   );
@@ -124,7 +110,7 @@ const StButton = styled.button`
   border: none;
   height: 40px;
   cursor: pointer;
-  margin: 40px;
+  margin: 120px;
   border-radius: 10px;
   width: 120px;
   font-weight: 700;

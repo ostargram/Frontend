@@ -3,7 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import Layout from "../components/Layout";
-import { __getPostThunk, __updatePostThunk } from "../redux/modules/postsSlice";
+import {
+  __getPostThunk,
+  __updatePostThunk,
+  __deletePostThunk,
+} from "../redux/modules/postsSlice";
 import CommentList from "../comments/CommentList";
 import styled from "styled-components";
 const Detail = () => {
@@ -45,6 +49,10 @@ const Detail = () => {
       })
     );
     setIsEditMode(false);
+  };
+
+  const onDeleteHandler = () => {
+    dispatch(__deletePostThunk(post.id));
   };
 
   return (
@@ -94,14 +102,30 @@ const Detail = () => {
                 저장
               </StButton2>
             ) : (
-              <StButton2
-                size="large"
-                onClick={() => {
-                  setIsEditMode(true);
-                }}
-              >
-                수정
-              </StButton2>
+              <StBox>
+                <StButton2
+                  size="large"
+                  onClick={() => {
+                    setIsEditMode(true);
+                  }}
+                >
+                  수정
+                </StButton2>
+                <StButton2
+                  type="button"
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    const result = window.confirm("이 게시물을 지울까요?");
+                    if (result) {
+                      return onDeleteHandler();
+                    } else {
+                      return;
+                    }
+                  }}
+                >
+                  삭제하기
+                </StButton2>{" "}
+              </StBox>
             )}
           </div>
         </StDiv1>
@@ -143,7 +167,15 @@ const StDiv1 = styled.div`
   margin-top: 55%;
   margin-left: 42%;
 `;
+
+const StBox = styled.div`
+  display: flex;
+`;
+
 const StButton2 = styled.button`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   border: none;
   height: 40px;
   cursor: pointer;

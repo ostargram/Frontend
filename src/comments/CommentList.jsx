@@ -14,11 +14,10 @@ const CommentList = ({ list }) => {
   const [isShow, setisShow] = useState(false);
   const { isLoading, posts, error } = useSelector((state) => state.posts);
 
-  /*   const data = useSelector(
-    (state) => state.commentlist.commentsByPostId.comment
-    
-  ); */
-  ///console.log(data);
+  // const data = useSelector(
+  //   (state) => state.commentlist.commentsByPostId.comment
+  // );
+  // console.log(data);
 
   useEffect(() => {
     if (isShow) {
