@@ -68,7 +68,7 @@ const Comment = ({ text, id }) => {
             <input
               type="text"
               value={updatedComment}
-              maxlength={100}
+              maxlength={50}
               onChange={(event) => {
                 setUpdatedComment(event.target.value);
               }}
@@ -84,24 +84,23 @@ const Comment = ({ text, id }) => {
           {
             <div>
               {/* <div>{id}</div> */}
-              <div>{text}</div>
+              <div>{text}</div>{" "}
+              <button
+                // disabled={isGlobalEditmode}
+                onClick={onChangeEditButtonHandler}
+              >
+                수정
+              </button>
+              <button
+                onClick={onDeleteButtonHandler}
+                // disabled={isGlobalEditmode}
+              >
+                삭제
+              </button>
             </div>
           }
 
-          <div>
-            <button
-              // disabled={isGlobalEditmode}
-              onClick={onChangeEditButtonHandler}
-            >
-              수정
-            </button>
-            <button
-              onClick={onDeleteButtonHandler}
-              // disabled={isGlobalEditmode}
-            >
-              삭제
-            </button>
-          </div>
+          <div></div>
         </>
       )}
     </div>

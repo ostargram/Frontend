@@ -184,6 +184,7 @@ export const postSlice = createSlice({
       state.isLoading = false;
       console.log(action.payload);
       state.posts = action.payload;
+      console.log("전체게시물 가져오기", action.payload);
     },
     [__getPostsThunk.rejected]: (state, action) => {
       state.isLoading = false;
@@ -210,6 +211,7 @@ export const postSlice = createSlice({
     [__getPostThunk.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
+      console.log("상세 게시물 가져오기", state.post);
     },
     [__getPostThunk.rejected]: (state, action) => {
       state.isLoading = false;

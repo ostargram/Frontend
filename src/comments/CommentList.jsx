@@ -12,7 +12,7 @@ const CommentList = ({ list }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const [isShow, setisShow] = useState(false);
-  const { isLoading, posts, error } = useSelector((state) => state.posts);
+  // const { posts } = useSelector((state) => state.posts);
 
   // const data = useSelector(
   //   (state) => state.commentlist.commentsByPostId.comment

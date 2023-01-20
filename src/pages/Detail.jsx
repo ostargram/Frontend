@@ -193,8 +193,8 @@ const StButton3 = styled.button`
   cursor: pointer;
   border-radius: 10px;
   width: 120px;
-  margin-top: 25%;
-  margin-left: 5%;
+  margin-top: 15%;
+  margin-left: 44.5%;
 `;
 
 const StButton2 = styled.button`

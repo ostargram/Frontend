@@ -35,12 +35,12 @@ const AddComment = () => {
     <form onSubmit={onAddCommentButtonHandler}>
       <div></div>
       <input
-        placeholder="댓글을 추가하세요. (100자 이내)"
+        placeholder="댓글을 추가하세요. (50자 이내)"
         value={comment.content}
         name="content"
         type="text"
         onChange={onChangeInputHandler}
-        maxLength={100}
+        maxLength={50}
       />
       <button type="submit" onClick={onAddCommentButtonHandler}>
         추가하기

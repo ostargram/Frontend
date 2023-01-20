@@ -7,10 +7,11 @@ export const __getCommentsByPostId = createAsyncThunk(
   "GET_COMMENT_BY_POST_ID",
   async (arg, thunkAPI) => {
     try {
-      const text = arg.content;
-
-      const { data } = await axiosInstance.get(`/posts/${arg}`, { text });
-      console.log(data);
+      const { data } = await axiosInstance.get(`/posts/${arg}`);
+      // 매개변수 해당 포스트글 id
+      console.log("매개변수", arg);
+      // console.log("텍스트", text);
+      // console.log("전체 댓글", data);
       return thunkAPI.fulfillWithValue(data.comments);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -23,8 +24,10 @@ export const __deleteComment = createAsyncThunk(
   "DELETE_COMMENT",
   async (arg, thunkAPI) => {
     try {
-      axiosInstance.delete(`/comments/${arg}`);
       //await axios.delete(`${"http://localhost:3001"}/commentlist/${arg}`);
+      axiosInstance.delete(`/comments/${arg}`);
+      // 여기도 아이디만...
+      console.log("딜리트부분", arg);
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
       return thunkAPI.rejectWithValue(e.code);
@@ -39,9 +42,13 @@ export const __updateComment = createAsyncThunk(
     try {
       const text = arg.text;
       const data = axiosInstance.put(`/comments/${arg.id}`, { text });
-      console.log(arg.content);
+      console.log("매개변수", arg);
+      console.log("텍스트라는뎁쇼?", text);
+      console.log("수정의 데이타?", data.data);
+
       return thunkAPI.fulfillWithValue(arg);
     } catch (e) {
+      console.log(e);
       return thunkAPI.rejectWithValue(e);
     }
   }
@@ -103,19 +110,21 @@ export const commentsSlice = createSlice({
     // clearComment: (state) => {
     //   state.comments.content = "";
     // },
-    globalEditModeToggle: (state, action) => {
-      state.isGlobalEditmode = action.payload;
-    },
+    // globalEditModeToggle: (state, action) => {
+    //   state.isGlobalEditmode = action.payload;
+    // },
   },
   extraReducers: {
     // 댓글 조회 (postId)
     [__getCommentsByPostId.pending]: (state) => {
       state.commentsByPostId.isLoading = true;
     },
+
     [__getCommentsByPostId.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      state.commentlist.comments = action.payload;
-      console.log("풀필드", state.commentsByPostId.comments);
+      state.commentsByPostId = action.payload;
+      console.log(action.payload);
+      // console.log("풀필드", state.post.comments.text);
     },
     [__getCommentsByPostId.rejected]: (state, action) => {
       state.commentsByPostId.isLoading = false;
