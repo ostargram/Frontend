@@ -236,9 +236,8 @@ const StButton1 = styled.button`
 `;
 const STtextarea = styled.textarea`
   display: flex;
-  margin: -17.5%;
+
   width: 450px;
-  margin: -17.5%;
 `;
 const StHidden = styled.div`
   display: none;
