@@ -135,7 +135,7 @@ export const commentsSlice = createSlice({
     },
     [__deleteComment.fulfilled]: (state, action) => {
       state.commentsByPostId.isLoading = false;
-      const target = state.commentsByPostId.comment.findIndex(
+      const target = state.commentsByPostId.comments.findIndex(
         (comment) => comment.id === action.payload
       );
       state.commentsByPostId.comment.splice(target, 1);
