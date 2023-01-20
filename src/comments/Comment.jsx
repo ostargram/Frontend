@@ -39,6 +39,7 @@ const Comment = ({ text, id }) => {
         text: updatedComment,
       })
     );
+    window.location.reload();
     setIsEdit(false);
     // dispatch(globalEditModeToggle(false));
   };

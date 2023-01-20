@@ -21,6 +21,7 @@ const AddComment = () => {
     setComment({
       content: "",
     });
+    window.location.reload();
   };
 
   const onChangeInputHandler = (event) => {
